@@ -82,20 +82,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: var(--glass-bg, rgba(255, 255, 255, 0.03));
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
-  color: var(--text-main, #fff);
+  background: var(--bg-darker);
+  border: 1.5px solid var(--glass-border);
+  color: var(--text-main);
   font-size: 1.2rem;
   transition: var(--transition-normal, 0.3s ease);
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .socialIcons a:hover {
-  background: var(--accent-primary, #6366f1);
-  border-color: var(--accent-primary, #6366f1);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #fff;
   transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
 }
 
 .bottom {
