@@ -10,7 +10,7 @@
 }
 
 .scrolled {
-  background: var(--glass-bg);
+  background: var(--navbar-scrolled-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--glass-border);
@@ -27,52 +27,80 @@
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: 1px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logoAvatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 12px rgba(99, 102, 241, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transform: scale(1.0);
+}
+
+.logo:hover .logoAvatar {
+  box-shadow: 0 0 0 2px var(--accent-secondary), 0 0 18px var(--accent-primary);
+  transform: scale(1.1);
 }
 
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 0;
   align-items: center;
 }
 
 .navLink {
-  color: var(--text-main);
-  text-decoration: none;
+  color: var(--text-muted);
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: color var(--transition-fast);
   position: relative;
+  padding: 0.5rem 0.9rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-decoration: none;
 }
 
 .navLink::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
+  bottom: 0;
+  left: 0.9rem;
+  right: 0.9rem;
   height: 2px;
   background: var(--accent-gradient);
-  transition: width var(--transition-normal);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
 }
 
 .navLink:hover {
-  color: #fff;
+  color: var(--accent-primary);
 }
 
-.navLink:hover::after,
-.active::after {
-  width: 100%;
+.navLink:hover::after {
+  transform: scaleX(1);
 }
 
-.active {
-  color: var(--text-main);
+.activeLink {
+  color: var(--accent-primary);
 }
+
+.activeLink::after {
+  transform: scaleX(1);
+}
+
+
 
 .controls {
   display: flex;
