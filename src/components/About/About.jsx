@@ -1,0 +1,111 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
+import profileImg from '../../assets/profile.jpg';
+import styles from './About.module.css';
+
+const About = () => {
+  const textVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
+    }
+  };
+
+
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  return (
+    <section id="about" className={styles.about}>
+      <div className="section-container">
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          About Me
+        </motion.h2>
+
+        <div className={styles.content}>
+          <motion.div 
+            className={styles.textContent}
+            variants={textVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <p className={styles.description}>
+              Software Engineering student focused on designing and developing practical, scalable software solutions. Passionate about turning ideas into real applications, with hands-on experience in full-stack development and a strong drive to grow as a professional engineer.
+            </p>
+
+            <div className={styles.highlights}>
+              <div className={styles.highlightItem}>
+                <div className={styles.icon}><FiMapPin /></div>
+                <div>
+                  <strong>Location</strong>
+                  <div className={styles.itemText}>Sri Lanka</div>
+                </div>
+              </div>
+              
+              <div className={styles.highlightItem}>
+                <div className={styles.icon}><FiCode /></div>
+                <div>
+                  <strong>Background</strong>
+                  <div className={styles.itemText}>Software Engineering Student</div>
+                </div>
+              </div>
+
+              <div className={styles.highlightItem}>
+                <div className={styles.icon}><FiTarget /></div>
+                <div>
+                  <strong>Career Goal</strong>
+                  <div className={styles.itemText}>Software Engineer</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className={styles.imageContent}
+            variants={imageVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div 
+              className={styles.imageContainer}
+              onMouseMove={handleMouseMove}
+            >
+              <div className={styles.imageWrapper}>
+                <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.profileImage} />
+                <div className={styles.imageOverlay}></div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
