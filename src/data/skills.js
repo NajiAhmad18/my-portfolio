@@ -17,10 +17,10 @@ export const skillsData = {
   technologies: [
     { name: "React", icon: "SiReact", color: "#61DAFB" },
     { name: "Node.js", icon: "SiNodedotjs", color: "#339933" },
-    { name: "Express", icon: "SiExpress", color: "#ffffff" },
+    { name: "Express", icon: "SiExpress", color: "#8b8b8b" },
     { name: "MongoDB", icon: "SiMongodb", color: "#47A248" },
     { name: "MySQL", icon: "SiMysql", color: "#4479A1" },
     { name: "Tailwind CSS", icon: "SiTailwindcss", color: "#06B6D4" },
-    { name: "Three.js", icon: "SiThreedotjs", color: "#ffffff" },
+    { name: "Three.js", icon: "SiThreedotjs", color: "#8b8b8b" },
   ]
 };
