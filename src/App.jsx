@@ -16,6 +16,7 @@ const PageTransition = React.lazy(() => import('./components/PageTransition'));
 const ScrollToTop = React.lazy(() => import('./components/ScrollToTop'));
 const HeroScene = React.lazy(() => import('./components/Hero/HeroScene'));
 const ParticlesBg = React.lazy(() => import('./components/Hero/ParticlesBg'));
+const LiquidBlobs = React.lazy(() => import('./components/LiquidBlobs/LiquidBlobs'));
 
 // Check WebGL support before rendering 3D
 const checkWebGL = () => {
@@ -74,6 +75,8 @@ function App() {
 
   return (
     <div className="app-container" style={{ position: 'relative' }}>
+      {/* Liquid blob ambient background */}
+      <Suspense fallback={null}><LiquidBlobs /></Suspense>
       {/* Fixed 3D background that fades as you scroll */}
       <GlobalBackground />
 
