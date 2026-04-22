@@ -8,9 +8,10 @@
 
 .svg {
   width: 100%;
-  max-width: 400px;
+  max-width: 180px;
   height: auto;
   overflow: visible;
+  opacity: 0.85;
 }
 
 /* Developer SVG Animations */
