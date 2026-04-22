@@ -1,7 +1,48 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import styles from './Hero.module.css';
+
+const MagneticName = () => {
+  const ref = useRef(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { stiffness: 150, damping: 20 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const rotateX = useTransform(springY, [-0.5, 0.5], ['8deg', '-8deg']);
+  const rotateY = useTransform(springX, [-0.5, 0.5], ['-8deg', '8deg']);
+  const translateY = useTransform(springY, [-0.5, 0.5], ['-6px', '6px']);
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) / (rect.width / 2));
+    y.set((e.clientY - centerY) / (rect.height / 2));
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.h1
+      ref={ref}
+      className={styles.name}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ rotateX, rotateY, translateY, transformStyle: 'preserve-3d', perspective: 800 }}
+    >
+      <span>Naji Ahmad </span>
+      <span className="text-gradient">Javahir</span>
+    </motion.h1>
+  );
+};
 
 const Hero = () => {
   const containerVariants = {
@@ -29,9 +70,9 @@ const Hero = () => {
           Hello, I'm
         </motion.p>
 
-        <motion.h1 variants={itemVariants} className={styles.name}>
-          Naji Ahmad <span className="text-gradient">Javahir</span>
-        </motion.h1>
+        <motion.div variants={itemVariants}>
+          <MagneticName />
+        </motion.div>
 
         <motion.h2 variants={itemVariants} className={styles.role}>
           Software Engineering Student
@@ -60,3 +101,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
