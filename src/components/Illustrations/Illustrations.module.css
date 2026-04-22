@@ -1,0 +1,75 @@
+.svgContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Developer SVG Animations */
+.gear {
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.svg:hover .gear {
+  animation: spin 4s linear infinite;
+}
+
+.bracket {
+  transition: transform 0.3s ease;
+}
+
+.svg:hover .bracketLeft {
+  transform: translateX(-10px);
+}
+
+.svg:hover .bracketRight {
+  transform: translateX(10px);
+}
+
+.floatingElement {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Contact SVG Animations */
+.paperPlane {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.svg:hover .paperPlane {
+  animation: fly 1s ease-in-out infinite alternate;
+}
+
+.bubble {
+  transform-origin: bottom left;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.svg:hover .bubble {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes fly {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(15px, -15px) rotate(5deg); }
+}
