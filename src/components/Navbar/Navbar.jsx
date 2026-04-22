@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { NavLink, Link } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import profileImg from '../../assets/profile.jpg';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -17,10 +19,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home',     href: '/' },
+    { name: 'About',    href: '/about' },
+    { name: 'Skills',   href: '/skills' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Articles', href: '/articles' },
+    { name: 'Contact',  href: '/contact' },
   ];
 
   return (
@@ -31,20 +35,22 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className={styles.navContainer}>
-        <a href="#" className={styles.logo}>
-          <span className="text-gradient">NAJ</span>
-        </a>
+        <Link to="/about" className={styles.logo}>
+          <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.logoAvatar} />
+        </Link>
 
         <div className={`${styles.navLinks} ${mobileOpen ? styles.mobileOpen : ''}`}>
           {navLinks.map((link) => (
-            <a 
+            <NavLink 
               key={link.name} 
-              href={link.href} 
-              className={styles.navLink}
+              to={link.href} 
+              className={({ isActive }) => 
+                isActive ? `${styles.navLink} ${styles.activeLink}` : styles.navLink
+              }
               onClick={() => setMobileOpen(false)}
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
         </div>
         <div className={styles.controls}>
