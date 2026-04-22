@@ -72,11 +72,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    150px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-    var(--accent-primary),
-    transparent 40%
-  );
+  background: radial-gradient(150px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      var(--accent-primary),
+      transparent 40%);
   z-index: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -126,8 +124,15 @@
 }
 
 @keyframes smoothFloat {
-  0%, 100% { transform: scale(1.15) translateY(-5px) rotate(0deg); }
-  50% { transform: scale(1.15) translateY(-12px) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: scale(1.15) translateY(-5px) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.15) translateY(-12px) rotate(5deg);
+  }
 }
 
 .skillName {
@@ -149,7 +154,7 @@
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 1rem;
   }
-  
+
   .iconWrapper {
     font-size: 2.5rem;
   }
