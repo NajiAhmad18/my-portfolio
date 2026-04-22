@@ -30,7 +30,8 @@
 
 .tabBtn:hover {
   color: var(--text-main);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
+  border-color: var(--accent-primary);
 }
 
 .tabBtn.active {
@@ -51,15 +52,15 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--glass-bg);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: default;
-  overflow: hidden; /* Clips the rotating border */
-  padding: 2px; /* Border thickness */
+  overflow: hidden;
+  padding: 2px;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -102,8 +103,9 @@
 }
 
 .skillCard:hover .skillCardInner {
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--card-bg);
 }
+
 
 .iconWrapper {
   font-size: 2.5rem;

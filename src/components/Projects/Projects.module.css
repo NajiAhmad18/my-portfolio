@@ -15,11 +15,11 @@
 .projectCard {
   position: relative;
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--glass-bg);
   border-radius: 16px;
   cursor: pointer;
   overflow: hidden;
-  padding: 2px; /* Border thickness */
+  padding: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,11 +59,11 @@
 
 .projectCard:hover {
   transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 35px var(--shadow-color);
 }
 
 .projectCard:hover .projectCardInner {
-  background: rgba(15, 23, 42, 0.85);
+  background: var(--card-bg);
 }
 
 .title {

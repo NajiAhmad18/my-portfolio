@@ -109,13 +109,11 @@
   aspect-ratio: 1 / 1;
   border-radius: 28px;
   padding: 3px;
-  /* Space for the animated border */
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  /* Clips the rotating gradient to look like a border */
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 1;
 }
@@ -170,7 +168,7 @@
   background: linear-gradient(to bottom,
       transparent 0%,
       transparent 70%,
-      rgba(15, 23, 42, 0.8) 100%);
+      var(--overlay-gradient) 100%);
   pointer-events: none;
 }
 
