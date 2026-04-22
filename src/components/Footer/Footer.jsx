@@ -1,24 +1,56 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const navLinks = [
-    { name: 'Home', url: '#home' },
-    { name: 'About', url: '#about' },
-    { name: 'Skills', url: '#skills' },
-    { name: 'Projects', url: '#projects' },
-    { name: 'Articles', url: '#articles' },
+    { name: 'Home',     url: '/' },
+    { name: 'About',    url: '/about' },
+    { name: 'Skills',   url: '/skills' },
+    { name: 'Projects', url: '/projects' },
+    { name: 'Articles', url: '/articles' },
+    { name: 'Contact',  url: '/contact' },
   ];
 
+  const handlePhoneClick = (e) => {
+    e.preventDefault();
+    const confirmed = window.confirm(
+      '📞 Call Naji Ahmad Javahir?\n\n+94 75 8014 299\n\nYour device will open the phone app to place this call.'
+    );
+    if (confirmed) {
+      window.location.href = 'tel:+94758014299';
+    }
+  };
+
   const socialLinks = [
-    { icon: <FiGithub />, url: 'https://github.com/naji', label: 'GitHub' },
-    { icon: <FiLinkedin />, url: 'https://linkedin.com/in/naji', label: 'LinkedIn' },
-    { icon: <FiTwitter />, url: 'https://twitter.com/naji', label: 'Twitter' },
-    { icon: <FiMail />, url: 'mailto:naji@example.com', label: 'Email' }
+    {
+      icon: <FiGithub />,
+      url: 'https://github.com/NajiAhmad18',
+      label: 'GitHub',
+      external: true,
+    },
+    {
+      icon: <FiLinkedin />,
+      url: 'https://www.linkedin.com/in/naji-ahmad-javahir-a8612a236/',
+      label: 'LinkedIn',
+      external: true,
+    },
+    {
+      icon: <FiMail />,
+      url: 'mailto:naji.a.javahir@gmail.com',
+      label: 'Email',
+      external: false,
+    },
+    {
+      icon: <FiPhone />,
+      url: '#',
+      label: 'Phone',
+      external: false,
+      onClick: handlePhoneClick,
+    },
   ];
 
   return (
@@ -26,11 +58,11 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <a href="#home" className={styles.logo}>
+            <Link to="/" className={styles.logo}>
               NAJI.
-            </a>
+            </Link>
             <p className={styles.bio}>
-              Crafting high-performance web experiences with modern technologies. Let's build something amazing together.
+              Software Engineering student passionate about building scalable, practical solutions. Let's connect and build something amazing together.
             </p>
           </div>
 
@@ -39,7 +71,7 @@ const Footer = () => {
             <ul>
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.url}>{link.name}</a>
+                  <Link to={link.url}>{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -49,12 +81,14 @@ const Footer = () => {
             <h3>Connect</h3>
             <div className={styles.socialIcons}>
               {socialLinks.map((social) => (
-                <a 
+                <a
                   key={social.label}
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href={social.url}
+                  target={social.external ? '_blank' : undefined}
+                  rel={social.external ? 'noopener noreferrer' : undefined}
+                  onClick={social.onClick}
                   aria-label={social.label}
+                  title={social.label}
                 >
                   {social.icon}
                 </a>
@@ -66,7 +100,7 @@ const Footer = () => {
         <div className={styles.bottom}>
           <p>&copy; {currentYear} Naji Ahmad Javahir. All rights reserved.</p>
           <p className={styles.builtWith}>
-            Built with React & Three.js
+            Built with React &amp; Three.js
           </p>
         </div>
       </div>
@@ -75,3 +109,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
