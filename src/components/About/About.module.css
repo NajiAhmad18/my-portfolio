@@ -142,11 +142,10 @@
   width: 100%;
   height: 100%;
   border-radius: 25px;
-  /* Slightly smaller to fit inside Container */
   overflow: hidden;
   position: relative;
   z-index: 2;
-  background: var(--bg-darker);
+  background: var(--bg-dark);
 }
 
 .profileImage {
@@ -165,10 +164,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      transparent 70%,
-      var(--overlay-gradient) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    var(--bg-dark) 100%
+  );
+  opacity: 0.5;
   pointer-events: none;
 }
 
