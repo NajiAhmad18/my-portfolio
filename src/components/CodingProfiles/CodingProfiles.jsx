@@ -10,7 +10,7 @@ const CodingProfiles = () => {
       name: 'GitHub',
       icon: <FiGithub />,
       link: 'https://github.com/NajiAhmad18',
-      color: '#ffffff'
+      color: 'var(--text-main)'
     },
     {
       name: 'LeetCode',
