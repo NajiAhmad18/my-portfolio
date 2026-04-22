@@ -1,0 +1,104 @@
+.profiles {
+  padding: var(--section-padding);
+  background-color: transparent;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profileCard {
+  position: relative;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--text-main);
+  overflow: hidden;
+  padding: 2px; /* Border thickness */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profileCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    var(--accent-primary),
+    transparent 40%
+  );
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profileCard:hover::before {
+  opacity: 1;
+}
+
+.profileCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-darker);
+  border-radius: 18px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.profileCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.profileCard:hover .profileCardInner {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.iconWrapper {
+  font-size: 4rem;
+  color: var(--icon-color, var(--text-main));
+  transition: transform var(--transition-normal);
+}
+
+.profileCard:hover .iconWrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.platformName {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.externalIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translate(-10px, 10px);
+  transition: all var(--transition-normal);
+}
+
+.profileCard:hover .externalIcon {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--accent-primary);
+}
