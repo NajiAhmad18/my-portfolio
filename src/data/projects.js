@@ -5,8 +5,8 @@ export const projectsData = [
     shortDesc: "A full-stack MERN application with an API Gateway architecture and microservices.",
     description: "Developed a scalable backend using 8+ independently deployable microservices. Features include patient and doctor management, appointment booking, video consultations (telemedicine), an AI-based symptom checker, payment processing, and real-time notifications.",
     techStack: ["React", "Node.js", "Express.js", "MongoDB", "Microservices", "REST API"],
-    demoLink: "#",
-    githubLink: "https://github.com/NajiAhmad18",
+    demoLink: "https://github.com/ShafnyHadhy/health_care_appointment-microservices",
+    githubLink: "https://github.com/ShafnyHadhy/health_care_appointment-microservices",
     color: "#6366f1"
   },
   {
@@ -15,8 +15,8 @@ export const projectsData = [
     shortDesc: "Full-stack service management platform supporting repair, recycling, and product lifecycle tracking.",
     description: "Built a full-stack service management platform supporting repair, recycling, and product lifecycle tracking for a circular economy. Designed scalable RESTful backend using MVC architecture. Implemented JWT-based authentication and email OTP verification (SendGrid). Integrated Google Maps API for location-based service discovery. Developed role-based dashboards for Customer, Provider, Recycler, and Admin. Conducted API testing (Jest, Supertest) and performance testing (Artillery). Deployed frontend on Vercel and backend on Railway with CI/CD workflow.",
     techStack: ["React", "Node.js", "Express", "MongoDB", "Google Maps API", "Jest", "Supertest"],
-    demoLink: "#",
-    githubLink: "https://github.com/NajiAhmad18",
+    demoLink: "https://revolve-af.vercel.app/",
+    githubLink: "https://github.com/ShafnyHadhy/AF-backend-express",
     color: "#ec4899"
   },
   {

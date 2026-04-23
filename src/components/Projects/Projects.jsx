@@ -4,10 +4,22 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { projectsData } from '../../data/projects';
 import ProjectModal from './ProjectModal';
 import styles from './Projects.module.css';
+import { useTheme } from '../../context/ThemeContext';
+import { HealthcareIcon, RevolveIcon, VacationIcon, PharmacyIcon, BiddingIcon } from './ProjectIcons';
+
+const projectIcons = {
+  1: HealthcareIcon,
+  2: RevolveIcon,
+  3: VacationIcon,
+  4: PharmacyIcon,
+  5: BiddingIcon
+};
 
 const TiltCard = ({ project, onClick }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const { activeTheme } = useTheme();
+  const IconComponent = projectIcons[project.id];
 
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
@@ -59,6 +71,13 @@ const TiltCard = ({ project, onClick }) => {
       }}
     >
       <div className={styles.projectCardInner} style={{ transform: "translateZ(30px)" }}>
+        <div className={styles.projectImageContainer}>
+          {IconComponent && (
+            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <IconComponent color={project.color} theme={activeTheme} mouseX={mouseXSpring} mouseY={mouseYSpring} />
+            </div>
+          )}
+        </div>
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.shortDesc}>{project.shortDesc}</p>
         

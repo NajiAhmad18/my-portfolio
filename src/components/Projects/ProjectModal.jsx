@@ -2,8 +2,20 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiGithub, FiExternalLink } from 'react-icons/fi';
 import styles from './Projects.module.css';
+import { useTheme } from '../../context/ThemeContext';
+import { HealthcareIcon, RevolveIcon, VacationIcon, PharmacyIcon, BiddingIcon } from './ProjectIcons';
+
+const projectIcons = {
+  1: HealthcareIcon,
+  2: RevolveIcon,
+  3: VacationIcon,
+  4: PharmacyIcon,
+  5: BiddingIcon
+};
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
+  const { activeTheme } = useTheme();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -14,6 +26,8 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const IconComponent = project ? projectIcons[project.id] : null;
 
   return (
     <AnimatePresence>
@@ -37,6 +51,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             <button className={styles.closeBtn} onClick={onClose}>
               <FiX />
             </button>
+
+            <div className={styles.modalImageContainer}>
+              {IconComponent && (
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <IconComponent color={project.color} theme={activeTheme} />
+                </div>
+              )}
+            </div>
 
             <h3 className={styles.modalTitle}>{project.title}</h3>
             
