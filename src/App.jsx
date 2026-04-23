@@ -46,7 +46,7 @@ class SceneErrorBoundary extends React.Component {
 
 const GlobalBackground = () => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 1200, 3000], [0.7, 0.25, 0.08]);
+  const opacity = useTransform(scrollY, [0, 1200, 3000], [0.85, 0.5, 0.25]);
   const webGLSupported = React.useMemo(() => checkWebGL(), []);
 
   return (
