@@ -23,11 +23,24 @@ export const useProjects = () => {
 
     fetchProjects();
 
-    // Listen for custom events for local updates
+    // Listen for updates from other tabs
+    const channel = new BroadcastChannel('portfolio_updates');
+    channel.onmessage = (event) => {
+      if (event.data === 'projects_updated') {
+        fetchProjects();
+      }
+    };
+
+    // Keep custom event for local updates
     const handleUpdate = () => fetchProjects();
     window.addEventListener('projectsUpdated', handleUpdate);
-    return () => window.removeEventListener('projectsUpdated', handleUpdate);
+    
+    return () => {
+      window.removeEventListener('projectsUpdated', handleUpdate);
+      channel.close();
+    };
   }, []);
 
   return projects;
 };
+

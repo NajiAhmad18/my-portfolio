@@ -14,8 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio')
-  .then(() => console.log('MongoDB connected successfully'))
+const MONGO_URI = "mongodb://najiahmadjavahir:cluster0%40As1123@ac-ec49ane-shard-00-00.a1t0d1r.mongodb.net:27017,ac-ec49ane-shard-00-01.a1t0d1r.mongodb.net:27017,ac-ec49ane-shard-00-02.a1t0d1r.mongodb.net:27017/portfolio?ssl=true&replicaSet=atlas-y0sv70-shard-0&authSource=admin&retryWrites=true&w=majority";
+
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('MongoDB connected successfully (Force Connect)'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
