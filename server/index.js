@@ -94,12 +94,36 @@ app.post('/api/skills', async (req, res) => {
 });
 
 // 3. Delete a skill
-app.delete('/api/skills/:id', async (req, res) => {
+// --- Settings Routes ---
+const Settings = require('./models/Settings');
+
+// Get current settings
+app.get('/api/settings', async (req, res) => {
   try {
-    await Skill.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Skill deleted' });
+    let settings = await Settings.findOne();
+    if (!settings) {
+      settings = await Settings.create({}); // Create default if doesn't exist
+    }
+    res.json(settings);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+// Update settings
+app.post('/api/settings', async (req, res) => {
+  try {
+    let settings = await Settings.findOne();
+    if (!settings) {
+      settings = new Settings(req.body);
+    } else {
+      settings.resumeUrl = req.body.resumeUrl;
+      settings.lastUpdated = Date.now();
+    }
+    const savedSettings = await settings.save();
+    res.json(savedSettings);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 });
 

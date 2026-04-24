@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import GitHubStats from './GitHubStats';
 import ProjectManager from './ProjectManager';
 import SkillManager from './SkillManager';
-import { FiHome, FiLayout, FiGithub, FiMessageSquare, FiSettings, FiExternalLink, FiPieChart, FiCpu } from 'react-icons/fi';
+import { FiHome, FiLayout, FiGithub, FiMessageSquare, FiSettings, FiExternalLink, FiPieChart, FiCpu, FiFileText } from 'react-icons/fi';
+import SettingsManager from './SettingsManager';
 
 const AdminLayout = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -50,6 +51,8 @@ const AdminLayout = () => {
         return <SkillManager />;
       case 'messages':
         return <div style={{ padding: '4rem', textAlign: 'center', color: '#71717a' }}><FiMessageSquare size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} /><h3>No new messages</h3></div>;
+      case 'settings':
+        return <SettingsManager />;
       default:
         return null;
     }
