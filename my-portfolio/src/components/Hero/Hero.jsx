@@ -75,11 +75,11 @@ const Hero = () => {
         </motion.div>
 
         <motion.h2 variants={itemVariants} className={styles.role}>
-          Software Engineering Student
+          Software Engineering Undergraduate
         </motion.h2>
 
         <motion.p variants={itemVariants} className={styles.tagline}>
-          Aspiring Software Engineer passionate about building scalable, efficient, and user-focused applications that solve real-world problems.
+          Structured thinking. Clean code. Real solutions.
         </motion.p>
 
         <motion.div variants={itemVariants} className={styles.ctaGroup}>
