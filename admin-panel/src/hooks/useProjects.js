@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { projectsData } from '../data/projects';
 
-const API_URL = 'http://localhost:5001/api/projects';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/projects`;
 
 export const useProjects = () => {
   const [projects, setProjects] = useState(projectsData);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiPlus, FiTrash2, FiSave, FiX, FiCpu } from 'react-icons/fi';
 
-const API_URL = 'http://localhost:5001/api/skills';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/skills`;
 
 const SkillManager = () => {
   const [skills, setSkills] = useState([]);

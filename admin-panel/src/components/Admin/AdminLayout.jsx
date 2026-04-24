@@ -269,14 +269,16 @@ const TechPulse = () => {
   useEffect(() => {
     const fetchTechStats = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/projects');
-        const projects = await response.json();
-        
-        if (Array.isArray(projects)) {
-          const counts = {};
-          projects.forEach(p => {
-            p.techStack.forEach(tech => {
-              counts[tech] = (counts[tech] || 0) + 1;
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/projects`);
+        if (response.ok) {
+          const projects = await response.json();
+          
+          if (Array.isArray(projects)) {
+            const counts = {};
+            projects.forEach(p => {
+              p.techStack.forEach(tech => {
+                counts[tech] = (counts[tech] || 0) + 1;
+              });
             });
           });
           
