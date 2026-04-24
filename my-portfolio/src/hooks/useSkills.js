@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { skillsData } from '../data/skills';
 
-const API_URL = 'http://localhost:5001/api/skills';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/skills`;
 
 export const useSkills = () => {
   const [skills, setSkills] = useState(skillsData);

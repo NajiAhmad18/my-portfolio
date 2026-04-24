@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiPlus, FiEdit2, FiTrash2, FiSave, FiX, FiLayers } from 'react-icons/fi';
 
-const API_URL = 'http://localhost:5001/api/projects';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/projects`;
 
 const ProjectManager = () => {
   const [projects, setProjects] = useState([]);
