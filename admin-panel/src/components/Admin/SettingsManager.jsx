@@ -9,6 +9,8 @@ const SettingsManager = () => {
     siteTitle: '',
     siteSubtitle: '',
     aboutText: '',
+    resumeUrl: '',
+    resumeOriginalName: '',
     socialLinks: {
       github: '',
       linkedin: '',
@@ -33,6 +35,8 @@ const SettingsManager = () => {
           siteTitle: data.siteTitle || '',
           siteSubtitle: data.siteSubtitle || '',
           aboutText: data.aboutText || '',
+          resumeUrl: data.resumeUrl || '',
+          resumeOriginalName: data.resumeOriginalName || '',
           socialLinks: data.socialLinks || { github: '', linkedin: '', email: '', twitter: '' }
         });
       }
@@ -177,6 +181,47 @@ const SettingsManager = () => {
               value={settings.socialLinks.twitter}
               onChange={(e) => updateSocial('twitter', e.target.value)}
               placeholder="Twitter / X URL"
+            />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Advanced Asset Override (For Production) */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        style={{
+          background: '#0a0a0f',
+          padding: '2.5rem',
+          borderRadius: '24px',
+          border: '1px solid rgba(239, 68, 68, 0.05)',
+        }}
+      >
+        <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#fff' }}>
+          <FiInfo color="#ef4444" /> Advanced Asset Override
+        </h3>
+        <p style={{ fontSize: '0.85rem', color: '#52525b', marginBottom: '2rem' }}>
+          Use this to manually set paths for production (e.g., <code>/resume.pdf</code>).
+        </p>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>Resume Link / Path</label>
+            <input 
+              style={inputStyle}
+              value={settings.resumeUrl}
+              onChange={(e) => setSettings({...settings, resumeUrl: e.target.value})}
+              placeholder="e.g. /my-resume.pdf"
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>Download Name</label>
+            <input 
+              style={inputStyle}
+              value={settings.resumeOriginalName}
+              onChange={(e) => setSettings({...settings, resumeOriginalName: e.target.value})}
+              placeholder="e.g. Naji_Resume.pdf"
             />
           </div>
         </div>
