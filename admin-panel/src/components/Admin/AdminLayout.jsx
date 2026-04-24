@@ -29,17 +29,12 @@ const AdminLayout = () => {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
              {/* Main Hero Metrics */}
-             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
-                <StatsCard label="Total Visitors" value="1,284" change="+12%" icon={FiPieChart} color="#6366f1" />
-                <StatsCard label="Messages" value="42" change="+5" icon={FiMessageSquare} color="#10b981" />
-                <StatsCard label="Deployments" value="14" change="+2" icon={FiLayout} color="#8b5cf6" />
-                <StatsCard label="Uptime" value="99.9%" change="Stable" icon={FiCpu} color="#f59e0b" />
-             </div>
+             <OverviewStats />
 
              {/* Secondary Data Layer */}
              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '2rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                  <EngagementChart />
+                  <TechPulse />
                   <GitHubStats />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -201,6 +196,44 @@ const AdminLayout = () => {
   );
 };
 
+// --- Real-Time Overview Stats ---
+const OverviewStats = () => {
+  const [counts, setCounts] = useState({ projects: 0, skills: 0 });
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const [projRes, skillRes] = await Promise.all([
+          fetch('http://localhost:5001/api/projects'),
+          fetch('http://localhost:5001/api/skills')
+        ]);
+        const projects = await projRes.json();
+        const skills = await skillRes.json();
+        setCounts({
+          projects: Array.isArray(projects) ? projects.length : 0,
+          skills: Array.isArray(skills) ? skills.length : 0
+        });
+      } catch (err) {
+        console.error('Overview fetch error:', err);
+      }
+    };
+
+    fetchCounts();
+    const channel = new BroadcastChannel('portfolio_updates');
+    channel.onmessage = fetchCounts;
+    return () => channel.close();
+  }, []);
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
+      <StatsCard label="Total Visitors" value="1,284" change="+12%" icon={FiPieChart} color="#6366f1" />
+      <StatsCard label="Live Skills" value={counts.skills} change="Active" icon={FiCpu} color="#10b981" />
+      <StatsCard label="Live Projects" value={counts.projects} change="Deployed" icon={FiLayout} color="#8b5cf6" />
+      <StatsCard label="Uptime" value="99.9%" change="Stable" icon={FiCpu} color="#f59e0b" />
+    </div>
+  );
+};
+
 // --- Modern Stats Card ---
 const StatsCard = ({ label, value, change, icon: Icon, color }) => (
   <motion.div
@@ -228,41 +261,91 @@ const StatsCard = ({ label, value, change, icon: Icon, color }) => (
   </motion.div>
 );
 
-// --- Minimalist Engagement Chart ---
-const EngagementChart = () => (
-  <div style={{ padding: '2rem', borderRadius: '24px', background: '#0a0a0f', border: '1px solid rgba(255, 255, 255, 0.03)' }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-      <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Engagement Trend</h3>
-      <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <span style={{ fontSize: '0.75rem', color: '#52525b' }}>Last 30 Days</span>
+// --- Real-Time Tech Stack Pulse ---
+const TechPulse = () => {
+  const [techStats, setTechStats] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTechStats = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/projects');
+        const projects = await response.json();
+        
+        if (Array.isArray(projects)) {
+          const counts = {};
+          projects.forEach(p => {
+            p.techStack.forEach(tech => {
+              counts[tech] = (counts[tech] || 0) + 1;
+            });
+          });
+          
+          const sorted = Object.entries(counts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([name, count]) => ({ name, count }));
+          
+          setTechStats(sorted);
+        }
+      } catch (err) {
+        console.error('Tech pulse fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTechStats();
+    
+    // Refresh on updates
+    const channel = new BroadcastChannel('portfolio_updates');
+    channel.onmessage = (e) => {
+      if (e.data === 'projects_updated') fetchTechStats();
+    };
+    
+    return () => channel.close();
+  }, []);
+
+  return (
+    <div style={{ padding: '2rem', borderRadius: '24px', background: '#0a0a0f', border: '1px solid rgba(255, 255, 255, 0.03)', minHeight: '240px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Tech Stack Pulse</h3>
+          <p style={{ fontSize: '0.75rem', color: '#52525b', margin: '0.25rem 0 0 0' }}>Real-time database analysis</p>
+        </div>
+        <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#6366f1', boxShadow: '0 0 15px #6366f1' }} />
       </div>
+
+      {loading ? (
+        <div style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3f3f46' }}>Analyzing...</div>
+      ) : (
+        <div style={{ display: 'grid', gap: '1.25rem' }}>
+          {techStats.map((tech, index) => (
+            <div key={tech.name}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                <span style={{ color: '#a1a1aa', fontWeight: 500 }}>{tech.name}</span>
+                <span style={{ color: '#6366f1', fontWeight: 700 }}>{tech.count} {tech.count === 1 ? 'Project' : 'Projects'}</span>
+              </div>
+              <div style={{ height: '6px', background: 'rgba(255,255,255,0.02)', borderRadius: '3px', overflow: 'hidden' }}>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(tech.count / Math.max(...techStats.map(t => t.count))) * 100}%` }}
+                  transition={{ duration: 1, delay: index * 0.1 }}
+                  style={{ height: '100%', background: 'linear-gradient(90deg, #6366f1, #a855f7)', borderRadius: '3px' }} 
+                />
+              </div>
+            </div>
+          ))}
+          {techStats.length === 0 && (
+            <div style={{ textAlign: 'center', color: '#52525b', fontSize: '0.85rem', padding: '2rem' }}>
+              Add projects to see tech distribution
+            </div>
+          )}
+        </div>
+      )}
     </div>
-    <div style={{ height: '140px', width: '100%', position: 'relative' }}>
-      <svg width="100%" height="100%" viewBox="0 0 400 100" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path d="M0,80 Q40,75 80,40 T160,50 T240,20 T320,60 T400,30 V100 H0 Z" fill="url(#chartGradient)" />
-        <motion.path 
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          d="M0,80 Q40,75 80,40 T160,50 T240,20 T320,60 T400,30" 
-          fill="none" 
-          stroke="#6366f1" 
-          strokeWidth="2.5" 
-          strokeLinecap="round" 
-        />
-      </svg>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.65rem', color: '#3f3f46', textTransform: 'uppercase' }}>
-        <span>Mon</span><span>Wed</span><span>Fri</span><span>Sun</span>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
+
 
 // --- Refined System Health ---
 const SystemHealth = () => {
@@ -378,5 +461,7 @@ const DevLogo = () => (
     </svg>
   </motion.div>
 );
+
+
 
 export default AdminLayout;
