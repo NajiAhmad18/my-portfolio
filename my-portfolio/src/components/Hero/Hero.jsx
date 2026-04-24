@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import styles from './Hero.module.css';
+import { useSettings } from '../../hooks/useSettings';
 
 const MagneticName = () => {
   const ref = useRef(null);
@@ -45,6 +46,7 @@ const MagneticName = () => {
 };
 
 const Hero = () => {
+  const { resumeUrl } = useSettings();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,7 +88,7 @@ const Hero = () => {
           <a href="#projects" className={`${styles.btn} ${styles.primary}`}>
             View Projects
           </a>
-          <a href="/resume.pdf" download className={`${styles.btn} ${styles.secondary}`}>
+          <a href={resumeUrl} download target="_blank" rel="noopener noreferrer" className={`${styles.btn} ${styles.secondary}`}>
             Download Resume
           </a>
         </motion.div>

@@ -1,0 +1,35 @@
+import { useState, useEffect } from 'react';
+
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/settings`;
+
+export const useSettings = () => {
+  const [settings, setSettings] = useState({ resumeUrl: '/resume.pdf' });
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (response.ok) {
+        const data = await response.json();
+        setSettings(data);
+      }
+    } catch (err) {
+      console.error('Failed to fetch settings:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSettings();
+
+    // Listen for updates from admin panel
+    const channel = new BroadcastChannel('portfolio_updates');
+    channel.onmessage = (event) => {
+      if (event.data === 'settings_updated') {
+        fetchSettings();
+      }
+    };
+
+    return () => channel.close();
+  }, []);
+
+  return settings;
+};
