@@ -276,18 +276,20 @@ const TechPulse = () => {
           if (Array.isArray(projects)) {
             const counts = {};
             projects.forEach(p => {
-              p.techStack.forEach(tech => {
-                counts[tech] = (counts[tech] || 0) + 1;
-              });
+              if (p.techStack && Array.isArray(p.techStack)) {
+                p.techStack.forEach(tech => {
+                  counts[tech] = (counts[tech] || 0) + 1;
+                });
+              }
             });
-          });
-          
-          const sorted = Object.entries(counts)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 5)
-            .map(([name, count]) => ({ name, count }));
-          
-          setTechStats(sorted);
+            
+            const sorted = Object.entries(counts)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 5)
+              .map(([name, count]) => ({ name, count }));
+            
+            setTechStats(sorted);
+          }
         }
       } catch (err) {
         console.error('Tech pulse fetch error:', err);
