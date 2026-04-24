@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { projectsData } from '../../data/projects';
+import { useProjects } from '../../hooks/useProjects';
 import ProjectModal from './ProjectModal';
 import styles from './Projects.module.css';
 import { useTheme } from '../../context/ThemeContext';
@@ -19,7 +19,7 @@ const TiltCard = ({ project, onClick }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const { activeTheme } = useTheme();
-  const IconComponent = projectIcons[project.id];
+  const IconComponent = projectIcons[project.id] || HealthcareIcon;
 
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
@@ -102,6 +102,7 @@ const TiltCard = ({ project, onClick }) => {
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const projects = useProjects();
 
   return (
     <section id="projects" className={styles.projects}>
@@ -117,7 +118,7 @@ const Projects = () => {
         </motion.h2>
 
         <div className={styles.grid}>
-          {projectsData.map(project => (
+          {projects.map(project => (
             <TiltCard 
               key={project.id} 
               project={project} 

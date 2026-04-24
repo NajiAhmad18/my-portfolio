@@ -6,6 +6,7 @@ const Skills = React.lazy(() => import('../Skills/Skills'));
 const Projects = React.lazy(() => import('../Projects/Projects'));
 const Articles = React.lazy(() => import('../Articles/Articles'));
 const CodingProfiles = React.lazy(() => import('../CodingProfiles/CodingProfiles'));
+const WhatsNext = React.lazy(() => import('../WhatsNext/WhatsNext'));
 const CTA = React.lazy(() => import('../CTA/CTA'));
 const Contact = React.lazy(() => import('../Contact/Contact'));
 
@@ -18,6 +19,7 @@ const Home = () => {
       <Projects />
       <Articles />
       <CodingProfiles />
+      <WhatsNext />
       <CTA />
       <Contact />
     </Suspense>

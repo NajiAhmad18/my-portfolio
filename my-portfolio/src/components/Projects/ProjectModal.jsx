@@ -4,6 +4,7 @@ import { FiX, FiGithub, FiExternalLink } from 'react-icons/fi';
 import styles from './Projects.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import { HealthcareIcon, RevolveIcon, VacationIcon, PharmacyIcon, BiddingIcon } from './ProjectIcons';
+import ArchitectureVisualizer from './ArchitectureVisualizer';
 
 const projectIcons = {
   1: HealthcareIcon,
@@ -70,6 +71,18 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             <h4 className={styles.modalSectionTitle}>About the Project</h4>
             <p className={styles.modalDesc}>{project.description}</p>
+
+            {project.problem && project.solution && (
+              <div style={{ marginTop: '1.5rem', background: activeTheme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)', padding: '1rem', borderRadius: '8px' }}>
+                <h4 className={styles.modalSectionTitle} style={{ color: '#ef4444', marginBottom: '0.5rem', fontSize: '1rem' }}>Problem</h4>
+                <p className={styles.modalDesc} style={{ marginBottom: '1rem' }}>{project.problem}</p>
+                
+                <h4 className={styles.modalSectionTitle} style={{ color: '#10b981', marginBottom: '0.5rem', fontSize: '1rem' }}>Solution</h4>
+                <p className={styles.modalDesc}>{project.solution}</p>
+              </div>
+            )}
+
+            <ArchitectureVisualizer projectId={project.id} />
 
             <div className={styles.links} style={{ marginTop: '3rem' }}>
               <a 

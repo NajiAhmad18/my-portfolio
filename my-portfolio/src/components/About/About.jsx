@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
 import profileImg from '../../assets/profile.jpg';
 import styles from './About.module.css';
+import MetricsDashboard from './MetricsDashboard';
 
 const About = () => {
   const textVariants = {
@@ -103,6 +104,8 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+
+        <MetricsDashboard />
       </div>
     </section>
   );
