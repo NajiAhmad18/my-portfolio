@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/settings`;
 
 export const useSettings = () => {
-  const [settings, setSettings] = useState({ resumeUrl: '/resume.pdf' });
+  const [settings, setSettings] = useState({ 
+    resumeUrl: '/Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf',
+    resumeOriginalName: 'Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf'
+  });
 
   const fetchSettings = async () => {
     try {
