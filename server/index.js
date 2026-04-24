@@ -14,10 +14,15 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const MONGO_URI = "mongodb://najiahmadjavahir:cluster0%40As1123@ac-ec49ane-shard-00-00.a1t0d1r.mongodb.net:27017,ac-ec49ane-shard-00-01.a1t0d1r.mongodb.net:27017,ac-ec49ane-shard-00-02.a1t0d1r.mongodb.net:27017/portfolio?ssl=true&replicaSet=atlas-y0sv70-shard-0&authSource=admin&retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGODB_URI;
+
+if (!MONGO_URI) {
+  console.error('CRITICAL: MONGODB_URI is not defined in environment variables!');
+  process.exit(1);
+}
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB connected successfully (Force Connect)'))
+  .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
