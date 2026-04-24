@@ -7,7 +7,7 @@ import {
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 import { TbBrandVscode } from 'react-icons/tb';
-import { skillsData } from '../../data/skills';
+import { useSkills } from '../../hooks/useSkills';
 
 import styles from './Skills.module.css';
 
@@ -34,7 +34,11 @@ const iconMap = {
 
 const Skills = () => {
   const [activeTab, setActiveTab] = useState('programming');
+  const skillsData = useSkills();
   const tabs = Object.keys(skillsData);
+
+  // Ensure activeTab is valid if skillsData changes
+  const currentTab = tabs.includes(activeTab) ? activeTab : (tabs[0] || 'programming');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -102,7 +106,7 @@ const Skills = () => {
           {tabs.map(tab => (
             <button
               key={tab}
-              className={`${styles.tabBtn} ${activeTab === tab ? styles.active : ''}`}
+              className={`${styles.tabBtn} ${currentTab === tab ? styles.active : ''}`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -112,14 +116,14 @@ const Skills = () => {
 
         <AnimatePresence mode="wait">
           <motion.div 
-            key={activeTab}
+            key={currentTab}
             className={styles.grid}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            {skillsData[activeTab].map((skill, index) => (
+            {skillsData[currentTab] && skillsData[currentTab].map((skill, index) => (
               <motion.div 
                 key={skill.name} 
                 className={styles.skillCard}
@@ -145,3 +149,4 @@ const Skills = () => {
 };
 
 export default Skills;
+

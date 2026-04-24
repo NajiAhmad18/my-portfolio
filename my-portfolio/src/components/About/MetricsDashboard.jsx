@@ -1,18 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
+import { useProjects } from '../../hooks/useProjects';
+import { useSkills } from '../../hooks/useSkills';
 import { FiGithub, FiCode, FiBox, FiCoffee } from 'react-icons/fi';
-
-const metrics = [
-  { id: 1, label: 'Projects Completed', value: '10+', icon: FiBox, color: '#3b82f6' },
-  { id: 2, label: 'Technologies Used', value: '15+', icon: FiCode, color: '#10b981' },
-  { id: 3, label: 'GitHub Commits', value: '500+', icon: FiGithub, color: '#8b5cf6' },
-  { id: 4, label: 'Cups of Coffee', value: '∞', icon: FiCoffee, color: '#f59e0b' },
-];
 
 const MetricsDashboard = () => {
   const { activeTheme } = useTheme();
   const isDark = activeTheme === 'dark';
+  const projects = useProjects();
+  const skillsGrouped = useSkills();
+
+  // Calculate real-time numbers
+  const projectCount = Array.isArray(projects) ? projects.length : 0;
+  
+  // Count total skills across all categories
+  const skillCount = Object.values(skillsGrouped).reduce((acc, category) => {
+    return acc + (Array.isArray(category) ? category.length : 0);
+  }, 0);
+
+  const metrics = [
+    { 
+      id: 1, 
+      label: 'Projects Completed', 
+      value: projectCount, 
+      icon: FiBox, 
+      color: '#3b82f6' 
+    },
+    { 
+      id: 2, 
+      label: 'Technologies Used', 
+      value: skillCount, 
+      icon: FiCode, 
+      color: '#10b981' 
+    },
+    { id: 3, label: 'GitHub Commits', value: '500+', icon: FiGithub, color: '#8b5cf6' },
+    { id: 4, label: 'Cups of Coffee', value: '∞', icon: FiCoffee, color: '#f59e0b' },
+  ];
+
 
   return (
     <div style={{ marginTop: '4rem' }}>
@@ -81,3 +106,4 @@ const MetricsDashboard = () => {
 };
 
 export default MetricsDashboard;
+
