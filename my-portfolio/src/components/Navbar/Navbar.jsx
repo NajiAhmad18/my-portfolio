@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { NavLink, Link } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
-import profileImg from '../../assets/profile.jpg';
+import Logo from '../Logo/Logo';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -35,10 +35,8 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className={styles.navContainer}>
-        <Link to="/about" className={styles.logo}>
-          <div className={styles.logoAvatarContainer}>
-            <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.logoAvatar} />
-          </div>
+        <Link to="/" className={styles.logo}>
+          <Logo size={42} />
         </Link>
 
         <div className={`${styles.navLinks} ${mobileOpen ? styles.mobileOpen : ''}`}>
