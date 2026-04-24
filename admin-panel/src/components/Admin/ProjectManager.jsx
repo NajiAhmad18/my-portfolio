@@ -10,13 +10,22 @@ const ProjectManager = () => {
   const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [error, setError] = useState(null);
+
   const fetchProjects = async () => {
     try {
+      setError(null);
       const response = await fetch(API_URL);
       const data = await response.json();
-      setProjects(data);
+
+      if (Array.isArray(data)) {
+        setProjects(data);
+      } else {
+        setError(data.message || 'Server returned an invalid format');
+      }
     } catch (err) {
       console.error('Fetch error:', err);
+      setError('Could not connect to the backend server.');
     } finally {
       setLoading(false);
     }
@@ -64,6 +73,10 @@ const ProjectManager = () => {
         fetchProjects();
         setEditingId(null);
         window.dispatchEvent(new CustomEvent('projectsUpdated'));
+        // Notify other tabs (like the portfolio)
+        const channel = new BroadcastChannel('portfolio_updates');
+        channel.postMessage('projects_updated');
+        channel.close();
       }
     } catch (err) {
       console.error('Save error:', err);
@@ -77,6 +90,10 @@ const ProjectManager = () => {
         if (response.ok) {
           fetchProjects();
           window.dispatchEvent(new CustomEvent('projectsUpdated'));
+          // Notify other tabs
+          const channel = new BroadcastChannel('portfolio_updates');
+          channel.postMessage('projects_updated');
+          channel.close();
         }
       } catch (err) {
         console.error('Delete error:', err);
@@ -85,6 +102,14 @@ const ProjectManager = () => {
   };
 
   if (loading) return <div style={{ color: '#fff', padding: '2rem' }}>Loading projects...</div>;
+
+  if (error) return (
+    <div style={{ padding: '2rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #ef4444', borderRadius: '12px', margin: '1rem', color: '#fff' }}>
+      <h3 style={{ color: '#ef4444', marginTop: 0 }}>Connection Error</h3>
+      <p>{error}</p>
+      <button onClick={fetchProjects} style={{ padding: '0.5rem 1rem', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>Retry</button>
+    </div>
+  );
 
   return (
     <div style={{ padding: '1rem' }}>
