@@ -174,17 +174,19 @@ app.post('/api/upload-resume', upload.single('resume'), async (req, res) => {
     }
 
     const resumeUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    const resumeOriginalName = req.file.originalname;
     
     let settings = await Settings.findOne();
     if (!settings) {
-      settings = new Settings({ resumeUrl });
+      settings = new Settings({ resumeUrl, resumeOriginalName });
     } else {
       settings.resumeUrl = resumeUrl;
+      settings.resumeOriginalName = resumeOriginalName;
       settings.lastUpdated = Date.now();
     }
     
     await settings.save();
-    res.json({ message: 'Resume uploaded successfully', resumeUrl });
+    res.json({ message: 'Resume uploaded successfully', resumeUrl, resumeOriginalName });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

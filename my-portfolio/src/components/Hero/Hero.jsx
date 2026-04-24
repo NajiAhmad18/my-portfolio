@@ -46,7 +46,7 @@ const MagneticName = ({ firstName, lastName }) => {
 };
 
 const Hero = () => {
-  const { resumeUrl, siteTitle, siteSubtitle, aboutText } = useSettings();
+  const { resumeUrl, siteTitle, siteSubtitle, aboutText, resumeOriginalName } = useSettings();
   
   const nameParts = siteTitle?.split(' ') || ['Naji', 'Ahmad'];
   const firstName = nameParts.slice(0, -1).join(' ') || 'Naji';
@@ -95,7 +95,7 @@ const Hero = () => {
           </a>
           <a 
             href={resumeUrl ? `${resumeUrl}${resumeUrl.includes('?') ? '&' : '?'}v=${Date.now()}` : '#'} 
-            download="Naji_Ahmad_Resume.pdf" 
+            download={resumeOriginalName || "Resume.pdf"} 
             target="_blank" 
             rel="noopener noreferrer" 
             className={`${styles.btn} ${styles.secondary}`}

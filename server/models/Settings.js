@@ -17,6 +17,10 @@ const SettingsSchema = new mongoose.Schema({
     type: String,
     default: '/resume.pdf'
   },
+  resumeOriginalName: {
+    type: String,
+    default: 'Resume.pdf'
+  },
   socialLinks: {
     github: { type: String, default: 'https://github.com/NajiAhmad18' },
     linkedin: { type: String, default: 'https://linkedin.com/in/najiahmad' },
