@@ -56,7 +56,7 @@ const About = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <p className={styles.description}>
-              Software Engineering student focused on designing and developing practical, scalable software solutions. Passionate about turning ideas into real applications, with hands-on experience in full-stack development and a strong drive to grow as a professional engineer.
+              Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.
             </p>
 
             <div className={styles.highlights}>
@@ -72,7 +72,7 @@ const About = () => {
                 <div className={styles.icon}><FiCode /></div>
                 <div>
                   <strong>Background</strong>
-                  <div className={styles.itemText}>Software Engineering Student</div>
+                  <div className={styles.itemText}>Software Engineering Undergraduate</div>
                 </div>
               </div>
 
