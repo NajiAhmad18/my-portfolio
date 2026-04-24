@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import DevMode from './components/DevMode';
 
 const Navbar = React.lazy(() => import('./components/Navbar/Navbar'));
 const Home = React.lazy(() => import('./components/Home/Home'));
@@ -17,6 +18,8 @@ const ScrollToTop = React.lazy(() => import('./components/ScrollToTop'));
 const HeroScene = React.lazy(() => import('./components/Hero/HeroScene'));
 const ParticlesBg = React.lazy(() => import('./components/Hero/ParticlesBg'));
 const LiquidBlobs = React.lazy(() => import('./components/LiquidBlobs/LiquidBlobs'));
+const AdminLayout = React.lazy(() => import('./components/Admin/AdminLayout'));
+const AdminTerminal = React.lazy(() => import('./components/Admin/AdminTerminal'));
 
 // Check WebGL support before rendering 3D
 const checkWebGL = () => {
@@ -72,19 +75,36 @@ const GlobalBackground = () => {
 
 function App() {
   const location = useLocation();
+  const [showTerminal, setShowTerminal] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleToggle = () => setShowTerminal(true);
+    window.addEventListener('toggleAdminTerminal', handleToggle);
+    return () => window.removeEventListener('toggleAdminTerminal', handleToggle);
+  }, []);
 
   return (
     <div className="app-container" style={{ position: 'relative' }}>
+      <AnimatePresence>
+        {showTerminal && (
+          <Suspense fallback={null}>
+            <AdminTerminal onClose={() => setShowTerminal(false)} />
+          </Suspense>
+        )}
+      </AnimatePresence>
+      
+      {/* Hidden developer mode easter egg – press CMD+K / CTRL+K */}
+      <DevMode />
       {/* Liquid blob ambient background */}
       <Suspense fallback={null}><LiquidBlobs /></Suspense>
       {/* Fixed 3D background that fades as you scroll */}
-      <GlobalBackground />
+      {location.pathname !== '/admin' && <GlobalBackground />}
 
       <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a0f', color: '#fff' }}>Loading...</div>}>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <ScrollToTop />
-          <Navbar />
-          <main style={{ paddingTop: location.pathname === '/' ? '0' : '80px' }}>
+          {location.pathname !== '/admin' && <Navbar />}
+          <main style={{ paddingTop: (location.pathname === '/' || location.pathname === '/admin') ? '0' : '80px' }}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 {/* Home: all sections stacked, scroll through everything */}
@@ -96,10 +116,11 @@ function App() {
                 <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
                 <Route path="/articles" element={<PageTransition><><Articles /><CodingProfiles /></></PageTransition>} />
                 <Route path="/contact" element={<PageTransition><><CTA /><Contact /></></PageTransition>} />
+                <Route path="/admin" element={<Suspense fallback={null}><AdminLayout /></Suspense>} />
               </Routes>
             </AnimatePresence>
           </main>
-          <Footer />
+          {location.pathname !== '/admin' && <Footer />}
         </div>
       </Suspense>
     </div>

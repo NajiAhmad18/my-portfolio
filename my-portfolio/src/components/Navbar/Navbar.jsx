@@ -36,7 +36,9 @@ const Navbar = () => {
     >
       <div className={styles.navContainer}>
         <Link to="/about" className={styles.logo}>
-          <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.logoAvatar} />
+          <div className={styles.logoAvatarContainer}>
+            <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.logoAvatar} />
+          </div>
         </Link>
 
         <div className={`${styles.navLinks} ${mobileOpen ? styles.mobileOpen : ''}`}>

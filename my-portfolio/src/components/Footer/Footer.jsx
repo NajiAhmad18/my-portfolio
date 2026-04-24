@@ -99,7 +99,28 @@ const Footer = () => {
 
         <div className={styles.bottom}>
           <p>&copy; {currentYear} Naji Ahmad Javahir. All rights reserved.</p>
-          <p className={styles.builtWith}>
+          <p 
+            className={styles.builtWith}
+            onClick={() => {
+              const now = Date.now();
+              const lastClick = window._lastAdminClick || 0;
+              const clickCount = window._adminClickCount || 0;
+              
+              if (now - lastClick < 500) {
+                window._adminClickCount = clickCount + 1;
+              } else {
+                window._adminClickCount = 1;
+              }
+              
+              window._lastAdminClick = now;
+              
+              if (window._adminClickCount === 3) {
+                window.dispatchEvent(new CustomEvent('toggleAdminTerminal'));
+                window._adminClickCount = 0;
+              }
+            }}
+            style={{ cursor: 'default' }}
+          >
             Built with React &amp; Three.js
           </p>
         </div>
