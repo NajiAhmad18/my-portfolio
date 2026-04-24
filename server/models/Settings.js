@@ -1,9 +1,27 @@
 const mongoose = require('mongoose');
 
 const SettingsSchema = new mongoose.Schema({
+  siteTitle: {
+    type: String,
+    default: 'Naji Ahmad'
+  },
+  siteSubtitle: {
+    type: String,
+    default: 'Software Engineering Undergraduate'
+  },
+  aboutText: {
+    type: String,
+    default: 'Structured thinking. Clean code. Real solutions.'
+  },
   resumeUrl: {
     type: String,
-    default: '/resume.pdf' // Fallback to local public file
+    default: '/resume.pdf'
+  },
+  socialLinks: {
+    github: { type: String, default: 'https://github.com/NajiAhmad18' },
+    linkedin: { type: String, default: 'https://linkedin.com/in/najiahmad' },
+    email: { type: String, default: 'naji@example.com' },
+    twitter: { type: String, default: '' }
   },
   lastUpdated: {
     type: Date,

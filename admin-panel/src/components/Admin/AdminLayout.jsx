@@ -6,6 +6,7 @@ import ProjectManager from './ProjectManager';
 import SkillManager from './SkillManager';
 import { FiHome, FiLayout, FiGithub, FiMessageSquare, FiSettings, FiExternalLink, FiPieChart, FiCpu, FiFileText } from 'react-icons/fi';
 import SettingsManager from './SettingsManager';
+import ResumeManager from './ResumeManager';
 
 const AdminLayout = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -21,6 +22,7 @@ const AdminLayout = () => {
     { id: 'projects', label: 'Projects', icon: FiLayout },
     { id: 'skills', label: 'Skills', icon: FiCpu },
     { id: 'messages', label: 'Messages', icon: FiMessageSquare },
+    { id: 'resume', label: 'Resume', icon: FiFileText },
     { id: 'settings', label: 'Settings', icon: FiSettings },
   ];
 
@@ -51,6 +53,8 @@ const AdminLayout = () => {
         return <SkillManager />;
       case 'messages':
         return <div style={{ padding: '4rem', textAlign: 'center', color: '#71717a' }}><FiMessageSquare size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} /><h3>No new messages</h3></div>;
+      case 'resume':
+        return <ResumeManager />;
       case 'settings':
         return <SettingsManager />;
       default:
@@ -179,21 +183,23 @@ const AdminLayout = () => {
 
       {/* Main Content Area */}
       <main style={{ marginLeft: '280px', flex: 1, padding: '3rem 4rem', position: 'relative' }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3.5rem' }}>
-          <div>
-            <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0, letterSpacing: '-0.03em' }}>{menuItems.find(i => i.id === activeTab)?.label}</h1>
-            <p style={{ color: '#52525b', margin: '0.5rem 0 0 0', fontSize: '0.95rem' }}>Operational status: <span style={{ color: '#10b981' }}>Active</span></p>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-             <div style={{ textAlign: 'right' }}>
-                <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600 }}>Naji Ahmad</p>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: '#52525b' }}>Lead Architect</p>
-             </div>
-             <DevLogo />
-          </div>
-        </header>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3.5rem' }}>
+            <div>
+              <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0, letterSpacing: '-0.03em' }}>{menuItems.find(i => i.id === activeTab)?.label}</h1>
+              <p style={{ color: '#52525b', margin: '0.5rem 0 0 0', fontSize: '0.95rem' }}>Operational status: <span style={{ color: '#10b981' }}>Active</span></p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+               <div style={{ textAlign: 'right' }}>
+                  <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600 }}>Naji Ahmad</p>
+                  <p style={{ margin: 0, fontSize: '0.75rem', color: '#52525b' }}>Lead Architect</p>
+               </div>
+               <DevLogo />
+            </div>
+          </header>
 
-        {renderContent()}
+          {renderContent()}
+        </div>
       </main>
     </div>
   );

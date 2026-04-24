@@ -4,7 +4,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import styles from './Hero.module.css';
 import { useSettings } from '../../hooks/useSettings';
 
-const MagneticName = () => {
+const MagneticName = ({ firstName, lastName }) => {
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -39,14 +39,19 @@ const MagneticName = () => {
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, translateY, transformStyle: 'preserve-3d', perspective: 800 }}
     >
-      <span>Naji Ahmad </span>
-      <span className="text-gradient">Javahir</span>
+      <span>{firstName} </span>
+      <span className="text-gradient">{lastName}</span>
     </motion.h1>
   );
 };
 
 const Hero = () => {
-  const { resumeUrl } = useSettings();
+  const { resumeUrl, siteTitle, siteSubtitle, aboutText } = useSettings();
+  
+  const nameParts = siteTitle?.split(' ') || ['Naji', 'Ahmad'];
+  const firstName = nameParts.slice(0, -1).join(' ') || 'Naji';
+  const lastName = nameParts[nameParts.length - 1] || 'Ahmad';
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -73,22 +78,28 @@ const Hero = () => {
         </motion.p>
 
         <motion.div variants={itemVariants}>
-          <MagneticName />
+          <MagneticName firstName={firstName} lastName={lastName} />
         </motion.div>
 
         <motion.h2 variants={itemVariants} className={styles.role}>
-          Software Engineering Undergraduate
+          {siteSubtitle || 'Software Engineering Undergraduate'}
         </motion.h2>
 
         <motion.p variants={itemVariants} className={styles.tagline}>
-          Structured thinking. Clean code. Real solutions.
+          {aboutText || 'Structured thinking. Clean code. Real solutions.'}
         </motion.p>
 
         <motion.div variants={itemVariants} className={styles.ctaGroup}>
           <a href="#projects" className={`${styles.btn} ${styles.primary}`}>
             View Projects
           </a>
-          <a href={resumeUrl} download target="_blank" rel="noopener noreferrer" className={`${styles.btn} ${styles.secondary}`}>
+          <a 
+            href={resumeUrl ? `${resumeUrl}${resumeUrl.includes('?') ? '&' : '?'}v=${Date.now()}` : '#'} 
+            download="Naji_Ahmad_Resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={`${styles.btn} ${styles.secondary}`}
+          >
             Download Resume
           </a>
         </motion.div>
