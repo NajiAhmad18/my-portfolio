@@ -55,3 +55,5 @@ const Logo = ({ size = 40 }) => (
 );
 
 export default Logo;
+
+
