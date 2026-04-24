@@ -2,9 +2,11 @@ import React from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
+import { useSettings } from '../../hooks/useSettings';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { socialLinks: dynamicLinks, siteTitle } = useSettings();
 
   const navLinks = [
     { name: 'Home',     url: '/' },
@@ -18,7 +20,7 @@ const Footer = () => {
   const handlePhoneClick = (e) => {
     e.preventDefault();
     const confirmed = window.confirm(
-      '📞 Call Naji Ahmad Javahir?\n\n+94 75 8014 299\n\nYour device will open the phone app to place this call.'
+      `📞 Call ${siteTitle || 'Naji Ahmad Javahir'}?\n\n+94 75 8014 299\n\nYour device will open the phone app to place this call.`
     );
     if (confirmed) {
       window.location.href = 'tel:+94758014299';
@@ -28,19 +30,19 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <FiGithub />,
-      url: 'https://github.com/NajiAhmad18',
+      url: dynamicLinks?.github || 'https://github.com/NajiAhmad18',
       label: 'GitHub',
       external: true,
     },
     {
       icon: <FiLinkedin />,
-      url: 'https://www.linkedin.com/in/naji-ahmad-javahir-a8612a236/',
+      url: dynamicLinks?.linkedin || 'https://www.linkedin.com/in/naji-ahmad-javahir-a8612a236/',
       label: 'LinkedIn',
       external: true,
     },
     {
       icon: <FiMail />,
-      url: 'mailto:naji.a.javahir@gmail.com',
+      url: dynamicLinks?.email ? `mailto:${dynamicLinks.email}` : 'mailto:naji.a.javahir@gmail.com',
       label: 'Email',
       external: false,
     },

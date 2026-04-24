@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiFileText, FiSave, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
+import { FiSave, FiCheckCircle, FiUser, FiGlobe, FiGithub, FiLinkedin, FiMail, FiTwitter, FiInfo } from 'react-icons/fi';
 
 const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/settings`;
 
 const SettingsManager = () => {
-  const [resumeUrl, setResumeUrl] = useState('');
+  const [settings, setSettings] = useState({
+    siteTitle: '',
+    siteSubtitle: '',
+    aboutText: '',
+    socialLinks: {
+      github: '',
+      linkedin: '',
+      email: '',
+      twitter: ''
+    }
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -19,7 +29,12 @@ const SettingsManager = () => {
       const response = await fetch(API_URL);
       if (response.ok) {
         const data = await response.json();
-        setResumeUrl(data.resumeUrl);
+        setSettings({
+          siteTitle: data.siteTitle || '',
+          siteSubtitle: data.siteSubtitle || '',
+          aboutText: data.aboutText || '',
+          socialLinks: data.socialLinks || { github: '', linkedin: '', email: '', twitter: '' }
+        });
       }
     } catch (err) {
       console.error('Failed to fetch settings:', err);
@@ -34,13 +49,13 @@ const SettingsManager = () => {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resumeUrl }),
+        body: JSON.stringify(settings),
       });
 
       if (response.ok) {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
-        // Notify portfolio of update
+        
         const channel = new BroadcastChannel('portfolio_updates');
         channel.postMessage('settings_updated');
         channel.close();
@@ -52,140 +67,185 @@ const SettingsManager = () => {
     }
   };
 
-  if (loading) return <div className="loading">Loading Settings...</div>;
+  const updateSocial = (key, value) => {
+    setSettings(prev => ({
+      ...prev,
+      socialLinks: { ...prev.socialLinks, [key]: value }
+    }));
+  };
+
+  if (loading) return <div style={{ color: '#71717a', padding: '2rem' }}>Loading Global Configurations...</div>;
 
   return (
-    <div className="settings-manager">
+    <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      
+      {/* General Settings */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="admin-card"
+        style={{
+          background: '#0a0a0f',
+          padding: '2.5rem',
+          borderRadius: '24px',
+          border: '1px solid rgba(255,255,255,0.03)',
+        }}
       >
-        <div className="card-header">
-          <h3><FiFileText /> Resume Management</h3>
-          <p>Update your live resume link here. You can use a local path like <code>/resume.pdf</code> or an external link from Google Drive/Cloudinary.</p>
+        <h3 style={{ fontSize: '1.25rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#fff' }}>
+          <FiGlobe color="#6366f1" /> Global Metadata
+        </h3>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>Site Title</label>
+            <input 
+              style={inputStyle}
+              value={settings.siteTitle}
+              onChange={(e) => setSettings({...settings, siteTitle: e.target.value})}
+              placeholder="e.g. Naji Ahmad"
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>Professional Subtitle</label>
+            <input 
+              style={inputStyle}
+              value={settings.siteSubtitle}
+              onChange={(e) => setSettings({...settings, siteSubtitle: e.target.value})}
+              placeholder="e.g. Software Engineer"
+            />
+          </div>
         </div>
 
-        <div className="settings-form">
-          <div className="input-group">
-            <label>Resume Link / Path</label>
-            <div className="url-input-wrapper">
-              <input 
-                type="text" 
-                value={resumeUrl}
-                onChange={(e) => setResumeUrl(e.target.value)}
-                placeholder="/resume.pdf"
-              />
-              <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="preview-btn">
-                <FiExternalLink /> Preview
-              </a>
-            </div>
-          </div>
-
-          <button 
-            onClick={handleSave} 
-            className={`save-btn ${success ? 'success' : ''}`}
-            disabled={saving}
-          >
-            {saving ? 'Saving...' : success ? <><FiCheckCircle /> Saved!</> : <><FiSave /> Update Resume</>}
-          </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <label style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>About Teaser / Bio</label>
+          <textarea 
+            style={{ ...inputStyle, minHeight: '100px', resize: 'vertical' }}
+            value={settings.aboutText}
+            onChange={(e) => setSettings({...settings, aboutText: e.target.value})}
+            placeholder="A short, high-impact description of your work..."
+          />
         </div>
       </motion.div>
 
-      <style jsx>{`
-        .settings-manager {
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        .admin-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px;
-          padding: 2rem;
-          backdrop-filter: blur(10px);
-        }
-        .card-header h3 {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          margin: 0 0 0.5rem 0;
-          color: var(--accent-primary);
-        }
-        .card-header p {
-          color: var(--text-muted);
-          font-size: 0.9rem;
-          margin-bottom: 2rem;
-        }
-        .input-group {
-          margin-bottom: 1.5rem;
-        }
-        .input-group label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: var(--text-main);
-        }
-        .url-input-wrapper {
-          display: flex;
-          gap: 1rem;
-        }
-        input {
-          flex: 1;
-          background: rgba(0, 0, 0, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          padding: 0.8rem 1rem;
-          color: white;
-          outline: none;
-          transition: border-color 0.3s;
-        }
-        input:focus {
-          border-color: var(--accent-primary);
-        }
-        .preview-btn {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.8rem 1.2rem;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 10px;
-          color: white;
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: background 0.3s;
-        }
-        .preview-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-        .save-btn {
-          width: 100%;
-          padding: 1rem;
-          border: none;
-          border-radius: 10px;
-          background: var(--accent-primary);
-          color: white;
-          font-weight: 600;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          transition: all 0.3s;
-        }
-        .save-btn:hover:not(:disabled) {
-          filter: brightness(1.2);
-          transform: translateY(-2px);
-        }
-        .save-btn.success {
-          background: #10b981;
-        }
-        .save-btn:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-        }
-      `}</style>
+      {/* Social Links */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        style={{
+          background: '#0a0a0f',
+          padding: '2.5rem',
+          borderRadius: '24px',
+          border: '1px solid rgba(255,255,255,0.03)',
+        }}
+      >
+        <h3 style={{ fontSize: '1.25rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#fff' }}>
+          <FiUser color="#10b981" /> Social Architecture
+        </h3>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+          <div style={socialGroupStyle}>
+            <FiGithub color="#71717a" />
+            <input 
+              style={socialInputStyle}
+              value={settings.socialLinks.github}
+              onChange={(e) => updateSocial('github', e.target.value)}
+              placeholder="GitHub URL"
+            />
+          </div>
+          <div style={socialGroupStyle}>
+            <FiLinkedin color="#71717a" />
+            <input 
+              style={socialInputStyle}
+              value={settings.socialLinks.linkedin}
+              onChange={(e) => updateSocial('linkedin', e.target.value)}
+              placeholder="LinkedIn URL"
+            />
+          </div>
+          <div style={socialGroupStyle}>
+            <FiMail color="#71717a" />
+            <input 
+              style={socialInputStyle}
+              value={settings.socialLinks.email}
+              onChange={(e) => updateSocial('email', e.target.value)}
+              placeholder="Contact Email"
+            />
+          </div>
+          <div style={socialGroupStyle}>
+            <FiTwitter color="#71717a" />
+            <input 
+              style={socialInputStyle}
+              value={settings.socialLinks.twitter}
+              onChange={(e) => updateSocial('twitter', e.target.value)}
+              placeholder="Twitter / X URL"
+            />
+          </div>
+        </div>
+      </motion.div>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', alignItems: 'center' }}>
+        {success && (
+          <motion.span 
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            style={{ color: '#10b981', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+          >
+            <FiCheckCircle /> Configuration Deployed Successfully
+          </motion.span>
+        )}
+        <button 
+          onClick={handleSave} 
+          disabled={saving}
+          style={{
+            padding: '1rem 2.5rem',
+            borderRadius: '14px',
+            background: '#6366f1',
+            color: '#fff',
+            border: 'none',
+            fontWeight: 600,
+            cursor: saving ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            transition: 'all 0.2s ease',
+            boxShadow: '0 4px 15px rgba(99, 102, 241, 0.2)'
+          }}
+        >
+          {saving ? 'Processing...' : <><FiSave /> Save Changes</>}
+        </button>
+      </div>
     </div>
   );
+};
+
+const inputStyle = {
+  background: '#16161d',
+  border: '1px solid #27272a',
+  borderRadius: '12px',
+  padding: '0.85rem 1.25rem',
+  color: '#fff',
+  fontSize: '0.95rem',
+  outline: 'none',
+  transition: 'border-color 0.2s ease',
+};
+
+const socialGroupStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+  background: '#16161d',
+  border: '1px solid #27272a',
+  borderRadius: '12px',
+  padding: '0 1.25rem',
+};
+
+const socialInputStyle = {
+  background: 'transparent',
+  border: 'none',
+  padding: '0.85rem 0',
+  color: '#fff',
+  fontSize: '0.95rem',
+  outline: 'none',
+  flex: 1
 };
 
 export default SettingsManager;

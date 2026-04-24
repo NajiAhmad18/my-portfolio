@@ -4,8 +4,10 @@ import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
 import profileImg from '../../assets/profile.jpg';
 import styles from './About.module.css';
 import MetricsDashboard from './MetricsDashboard';
+import { useSettings } from '../../hooks/useSettings';
 
 const About = () => {
+  const { aboutText, siteSubtitle } = useSettings();
   const textVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: { 
@@ -56,7 +58,7 @@ const About = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <p className={styles.description}>
-              Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.
+              {aboutText || 'Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.'}
             </p>
 
             <div className={styles.highlights}>
@@ -72,7 +74,7 @@ const About = () => {
                 <div className={styles.icon}><FiCode /></div>
                 <div>
                   <strong>Background</strong>
-                  <div className={styles.itemText}>Software Engineering Undergraduate</div>
+                  <div className={styles.itemText}>{siteSubtitle || 'Software Engineering Undergraduate'}</div>
                 </div>
               </div>
 
