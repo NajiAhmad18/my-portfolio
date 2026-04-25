@@ -102,7 +102,15 @@ const About = () => {
                 <div className={styles.cardIcon}><FiCode /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Experience</span>
-                  <span className={styles.cardValue}>{siteSubtitle || 'SWE Undergraduate'}</span>
+                  <span className={styles.cardValue}>{siteSubtitle || 'Software Engineering Undergraduate'}</span>
+                </div>
+              </div>
+
+              <div className={styles.highlightCard}>
+                <div className={styles.cardIcon}><FiStar /></div>
+                <div className={styles.cardInfo}>
+                  <span className={styles.cardLabel}>Education</span>
+                  <span className={styles.cardValue}>BSc (Hons) in Software Engineering (Reading)</span>
                 </div>
               </div>
 
@@ -110,7 +118,7 @@ const About = () => {
                 <div className={styles.cardIcon}><FiTarget /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Goal</span>
-                  <span className={styles.cardValue}>Software Engineer focused on building reliable, efficient, and scalable systems</span>
+                  <span className={styles.cardValue}>Focused on building reliable, efficient, and scalable systems</span>
                 </div>
               </div>
 
@@ -118,7 +126,11 @@ const About = () => {
                 <div className={styles.cardIcon}><FiStar /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Focus</span>
-                  <span className={styles.cardValue}>Clean code • System design • Real-world problem solving</span>
+                  <div className={styles.focusBadges}>
+                    <span className={styles.badge}>Clean code</span>
+                    <span className={styles.badge}>System design</span>
+                    <span className={styles.badge}>Real-world problem solving</span>
+                  </div>
                 </div>
               </div>
             </div>
