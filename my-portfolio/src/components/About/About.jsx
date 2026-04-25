@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
 import profileImg from '../../assets/profile.jpg';
+import EngineeringSvg from '../Illustrations/EngineeringSvg';
 import styles from './About.module.css';
 import MetricsDashboard from './MetricsDashboard';
 import { useSettings } from '../../hooks/useSettings';
@@ -60,6 +61,16 @@ const About = () => {
             <p className={styles.description}>
               {aboutText || 'Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.'}
             </p>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              style={{ width: '120px', margin: '1rem 0' }}
+            >
+              <EngineeringSvg />
+            </motion.div>
 
             <div className={styles.highlights}>
               <div className={styles.highlightItem}>
