@@ -11,8 +11,8 @@ const About = () => {
   const { aboutText, siteSubtitle } = useSettings();
   const textVariants = {
     hidden: { opacity: 0, x: -50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: { duration: 0.6, ease: "easeOut" }
     }
@@ -20,8 +20,8 @@ const About = () => {
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
     }
@@ -41,9 +41,9 @@ const About = () => {
     <section id="about" className={styles.about}>
       {/* Decorative background elements */}
       <div className={styles.bgBlob} />
-      
+
       <div className="section-container">
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,12 +52,12 @@ const About = () => {
         >
           <h2 className="section-title">About Me</h2>
           <div className={styles.svgWrapper}>
-             <EngineeringSvg />
+            <EngineeringSvg />
           </div>
         </motion.div>
 
         <div className={styles.contentGrid}>
-          <motion.div 
+          <motion.div
             className={styles.imageSection}
             variants={imageVariants}
             initial="hidden"
@@ -73,7 +73,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.textSection}
             variants={textVariants}
             initial="hidden"
@@ -83,8 +83,8 @@ const About = () => {
             <div className={styles.introBox}>
               <span className={styles.hello}>Hello! I'm Naji</span>
               <p className={styles.description}>
-                {!aboutText || aboutText === 'Structured thinking. Clean code. Real solutions.' 
-                  ? "Software Engineering Undergraduate focused on building practical, scalable solutions"
+                {!aboutText || aboutText === 'Structured thinking. Clean code. Real solutions.'
+                  ? "Software Engineering Undergraduate focused on building practical, scalable solutions."
                   : aboutText}
               </p>
             </div>
@@ -97,7 +97,7 @@ const About = () => {
                   <span className={styles.cardValue}>Sri Lanka</span>
                 </div>
               </div>
-              
+
               <div className={styles.highlightCard}>
                 <div className={styles.cardIcon}><FiCode /></div>
                 <div className={styles.cardInfo}>

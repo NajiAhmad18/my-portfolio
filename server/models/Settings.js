@@ -11,7 +11,7 @@ const SettingsSchema = new mongoose.Schema({
   },
   aboutText: {
     type: String,
-    default: "Software Engineering Undergraduate focused on building practical, scalable solutions"
+    default: "Software Engineering Undergraduate focused on building practical, scalable solutions."
   },
   resumeUrl: {
     type: String,
