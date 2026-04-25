@@ -18,7 +18,8 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  pointer-events: none; /* Let clicks pass through to particles/3D if needed */
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 /* Allow buttons to be clickable */
@@ -36,9 +37,10 @@
 }
 
 .name {
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
   line-height: 1.1;
   margin-bottom: 1rem;
+  will-change: transform;
 }
 
 .role {
