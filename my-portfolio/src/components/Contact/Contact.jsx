@@ -84,16 +84,6 @@ const Contact = () => {
           Get In Touch
         </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}
-        >
-          <ContactSvg />
-        </motion.div>
-
         <motion.form 
           ref={form} 
           onSubmit={sendEmail} 
@@ -150,6 +140,16 @@ const Contact = () => {
             </motion.div>
           )}
         </motion.form>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}
+        >
+          <ContactSvg />
+        </motion.div>
       </div>
     </section>
   );
