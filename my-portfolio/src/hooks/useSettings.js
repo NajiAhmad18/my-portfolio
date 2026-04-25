@@ -31,7 +31,16 @@ export const useSettings = () => {
       }
     };
 
-    return () => channel.close();
+    // Polling fallback for live updates across different origins (dev mode)
+    const pollInterval = import.meta.env.DEV ? 3000 : 30000;
+    const interval = setInterval(() => {
+      fetchSettings();
+    }, pollInterval);
+
+    return () => {
+      channel.close();
+      clearInterval(interval);
+    };
   }, []);
 
   return settings;

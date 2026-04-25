@@ -31,16 +31,18 @@ export const useProjects = () => {
       }
     };
 
-    // Keep custom event for local updates
-    const handleUpdate = () => fetchProjects();
-    window.addEventListener('projectsUpdated', handleUpdate);
-    
+    // Polling fallback for live updates across different origins
+    const pollInterval = import.meta.env.DEV ? 3000 : 30000;
+    const interval = setInterval(() => {
+      fetchProjects();
+    }, pollInterval);
+
     return () => {
       window.removeEventListener('projectsUpdated', handleUpdate);
       channel.close();
+      clearInterval(interval);
     };
   }, []);
 
   return projects;
 };
-
