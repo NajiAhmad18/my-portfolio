@@ -92,7 +92,7 @@ function App() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <ScrollToTop />
           <Navbar />
-          <main style={{ paddingTop: location.pathname === '/' ? '0' : '80px' }}>
+          <main style={{ paddingTop: '80px' }}>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 {/* Home: all sections stacked, scroll through everything */}
@@ -103,7 +103,7 @@ function App() {
                 <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
                 <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
                 <Route path="/articles" element={<PageTransition><><Articles /><CodingProfiles /></></PageTransition>} />
-                <Route path="/contact" element={<PageTransition><><CTA /><Contact /></></PageTransition>} />
+                <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
               </Routes>
             </AnimatePresence>
           </main>
