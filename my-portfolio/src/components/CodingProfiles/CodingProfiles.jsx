@@ -15,13 +15,13 @@ const CodingProfiles = () => {
     {
       name: 'LeetCode',
       icon: <SiLeetcode />,
-      link: '#', // Placeholder
+      link: 'https://leetcode.com/u/NajiAhmad/',
       color: '#FFA116'
     },
     {
       name: 'HackerRank',
       icon: <SiHackerrank />,
-      link: '#', // Placeholder
+      link: 'https://www.hackerrank.com/profile/naji_a_javahir',
       color: '#00EA64'
     }
   ];
