@@ -11,7 +11,7 @@ const SettingsSchema = new mongoose.Schema({
   },
   aboutText: {
     type: String,
-    default: "As a Software Engineering student, I am dedicated to bridging the gap between complex problems and elegant, scalable solutions. My approach is rooted in structured thinking and the pursuit of clean, maintainable code. Whether building high-performance web applications or architecting backend systems, I strive to create impactful user experiences that solve real-world challenges with precision and creativity."
+    default: "Software Engineering Undergraduate focused on building practical, scalable solutions"
   },
   resumeUrl: {
     type: String,

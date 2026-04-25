@@ -84,7 +84,7 @@ const About = () => {
               <span className={styles.hello}>Hello! I'm Naji</span>
               <p className={styles.description}>
                 {!aboutText || aboutText === 'Structured thinking. Clean code. Real solutions.' 
-                  ? "As a Software Engineering student, I am dedicated to bridging the gap between complex problems and elegant, scalable solutions. My approach is rooted in structured thinking and the pursuit of clean, maintainable code. Whether building high-performance web applications or architecting backend systems, I strive to create impactful user experiences that solve real-world challenges with precision and creativity."
+                  ? "Software Engineering Undergraduate focused on building practical, scalable solutions"
                   : aboutText}
               </p>
             </div>
