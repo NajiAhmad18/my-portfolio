@@ -94,7 +94,7 @@ const About = () => {
                 <div className={styles.cardIcon}><FiMapPin /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Location</span>
-                  <span className={styles.cardValue}>Sri Lanka</span>
+                  <span className={styles.cardValue}>Colombo,Sri Lanka</span>
                 </div>
               </div>
 
