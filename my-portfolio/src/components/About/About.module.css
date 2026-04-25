@@ -21,21 +21,26 @@
 }
 
 @keyframes float {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(-50px, 50px) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-50px, 50px) scale(1.1);
+  }
 }
 
 .header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   position: relative;
   z-index: 1;
 }
 
 .svgWrapper {
-  width: 140px;
-  margin: -1.5rem auto 0;
-  opacity: 0.8;
+  width: 120px;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .contentGrid {
@@ -122,6 +127,16 @@
 
 .introBox {
   position: relative;
+}
+
+.introTopRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.introText {
+  flex: 1;
 }
 
 .hello {
@@ -266,7 +281,7 @@
   .highlightsGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .header {
     margin-bottom: 3rem;
   }

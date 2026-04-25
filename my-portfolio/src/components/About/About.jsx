@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
 import profileImg from '../../assets/profile.jpg';
-import EngineeringSvg from '../Illustrations/EngineeringSvg';
+
 import styles from './About.module.css';
 import MetricsDashboard from './MetricsDashboard';
 import { useSettings } from '../../hooks/useSettings';
@@ -51,9 +51,6 @@ const About = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="section-title">About Me</h2>
-          <div className={styles.svgWrapper}>
-            <EngineeringSvg />
-          </div>
         </motion.div>
 
         <div className={styles.contentGrid}>
