@@ -6,7 +6,7 @@ export const useSettings = () => {
   const [settings, setSettings] = useState({ 
     siteTitle: 'Naji Ahmad Javahir',
     siteSubtitle: 'Software Engineering Undergraduate',
-    aboutText: "As a Software Engineering student, I am dedicated to bridging the gap between complex problems and elegant, scalable solutions. My approach is rooted in structured thinking and the pursuit of clean, maintainable code. Whether building high-performance web applications or architecting backend systems, I strive to create impactful user experiences that solve real-world challenges with precision and creativity.",
+    aboutText: 'Software Engineering Undergraduate focused on building practical, scalable solutions',
     resumeUrl: '/Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf',
     resumeOriginalName: 'Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf'
   });
