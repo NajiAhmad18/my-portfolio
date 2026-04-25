@@ -84,7 +84,7 @@ const About = () => {
               <span className={styles.hello}>Hello! I'm Naji</span>
               <p className={styles.description}>
                 {!aboutText || aboutText === 'Structured thinking. Clean code. Real solutions.'
-                  ? "Software Engineering Undergraduate focused on building practical, scalable solutions."
+                  ? "Software Engineering Undergraduate building full-stack applications and exploring scalable system design."
                   : aboutText}
               </p>
             </div>
@@ -110,7 +110,7 @@ const About = () => {
                 <div className={styles.cardIcon}><FiTarget /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Goal</span>
-                  <span className={styles.cardValue}>Software Engineer</span>
+                  <span className={styles.cardValue}>Software Engineer focused on building reliable, efficient, and scalable systems</span>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ const About = () => {
                 <div className={styles.cardIcon}><FiStar /></div>
                 <div className={styles.cardInfo}>
                   <span className={styles.cardLabel}>Focus</span>
-                  <span className={styles.cardValue}>Clean Code</span>
+                  <span className={styles.cardValue}>Clean code • System design • Real-world problem solving</span>
                 </div>
               </div>
             </div>
