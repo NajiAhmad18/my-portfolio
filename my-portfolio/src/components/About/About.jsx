@@ -39,80 +39,85 @@ const About = () => {
 
   return (
     <section id="about" className={styles.about}>
+      {/* Decorative background elements */}
+      <div className={styles.bgBlob} />
+      
       <div className="section-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div 
+          className={styles.header}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7 }}
         >
-          About Me
-        </motion.h2>
+          <h2 className="section-title">About Me</h2>
+          <div className={styles.svgWrapper}>
+             <EngineeringSvg />
+          </div>
+        </motion.div>
 
-        <div className={styles.content}>
+        <div className={styles.contentGrid}>
           <motion.div 
-            className={styles.textContent}
-            variants={textVariants}
+            className={styles.imageSection}
+            variants={imageVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
           >
-            <p className={styles.description}>
-              {aboutText || 'Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.'}
-            </p>
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              style={{ width: '120px', margin: '1rem 0' }}
-            >
-              <EngineeringSvg />
-            </motion.div>
-
-            <div className={styles.highlights}>
-              <div className={styles.highlightItem}>
-                <div className={styles.icon}><FiMapPin /></div>
-                <div>
-                  <strong>Location</strong>
-                  <div className={styles.itemText}>Sri Lanka</div>
-                </div>
+            <div className={styles.imageCard} onMouseMove={handleMouseMove}>
+              <div className={styles.imageInner}>
+                <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.profileImage} />
+                <div className={styles.imageOverlay} />
               </div>
-              
-              <div className={styles.highlightItem}>
-                <div className={styles.icon}><FiCode /></div>
-                <div>
-                  <strong>Background</strong>
-                  <div className={styles.itemText}>{siteSubtitle || 'Software Engineering Undergraduate'}</div>
-                </div>
-              </div>
-
-              <div className={styles.highlightItem}>
-                <div className={styles.icon}><FiTarget /></div>
-                <div>
-                  <strong>Career Goal</strong>
-                  <div className={styles.itemText}>Software Engineer</div>
-                </div>
-              </div>
+              <div className={styles.cardDecoration} />
             </div>
           </motion.div>
 
           <motion.div 
-            className={styles.imageContent}
-            variants={imageVariants}
+            className={styles.textSection}
+            variants={textVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
           >
-            <div 
-              className={styles.imageContainer}
-              onMouseMove={handleMouseMove}
-            >
-              <div className={styles.imageWrapper}>
-                <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.profileImage} />
-                <div className={styles.imageOverlay}></div>
+            <div className={styles.introBox}>
+              <span className={styles.hello}>Hello! I'm Naji</span>
+              <p className={styles.description}>
+                {aboutText || 'Software Engineering Undergraduate focused on designing and developing practical, scalable software solutions. I prioritize structured thinking and clean code to deliver real solutions to complex problems.'}
+              </p>
+            </div>
+
+            <div className={styles.highlightsGrid}>
+              <div className={styles.highlightCard}>
+                <div className={styles.cardIcon}><FiMapPin /></div>
+                <div className={styles.cardInfo}>
+                  <span className={styles.cardLabel}>Location</span>
+                  <span className={styles.cardValue}>Sri Lanka</span>
+                </div>
+              </div>
+              
+              <div className={styles.highlightCard}>
+                <div className={styles.cardIcon}><FiCode /></div>
+                <div className={styles.cardInfo}>
+                  <span className={styles.cardLabel}>Experience</span>
+                  <span className={styles.cardValue}>{siteSubtitle || 'SWE Undergraduate'}</span>
+                </div>
+              </div>
+
+              <div className={styles.highlightCard}>
+                <div className={styles.cardIcon}><FiTarget /></div>
+                <div className={styles.cardInfo}>
+                  <span className={styles.cardLabel}>Goal</span>
+                  <span className={styles.cardValue}>Software Engineer</span>
+                </div>
+              </div>
+
+              <div className={styles.highlightCard}>
+                <div className={styles.cardIcon}><FiStar /></div>
+                <div className={styles.cardInfo}>
+                  <span className={styles.cardLabel}>Focus</span>
+                  <span className={styles.cardValue}>Clean Code</span>
+                </div>
               </div>
             </div>
           </motion.div>
