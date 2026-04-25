@@ -9,6 +9,7 @@ require('dotenv').config();
 const Project = require('./models/Project');
 const Skill = require('./models/Skill');
 const Settings = require('./models/Settings');
+const Message = require('./models/Message');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -128,6 +129,44 @@ app.post('/api/skills', async (req, res) => {
     res.status(201).json(savedSkill);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+// --- Message Routes ---
+app.get('/api/messages', async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ createdAt: -1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.post('/api/messages', async (req, res) => {
+  try {
+    const newMessage = new Message(req.body);
+    const savedMessage = await newMessage.save();
+    res.status(201).json(savedMessage);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.put('/api/messages/:id/read', async (req, res) => {
+  try {
+    const updated = await Message.findByIdAndUpdate(req.params.id, { read: true }, { new: true });
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.delete('/api/messages/:id', async (req, res) => {
+  try {
+    await Message.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Message deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

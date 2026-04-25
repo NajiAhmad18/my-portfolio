@@ -7,6 +7,7 @@ import SkillManager from './SkillManager';
 import { FiHome, FiLayout, FiGithub, FiMessageSquare, FiSettings, FiExternalLink, FiPieChart, FiCpu, FiFileText } from 'react-icons/fi';
 import SettingsManager from './SettingsManager';
 import ResumeManager from './ResumeManager';
+import MessageManager from './MessageManager';
 
 const AdminLayout = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -52,7 +53,7 @@ const AdminLayout = () => {
       case 'skills':
         return <SkillManager />;
       case 'messages':
-        return <div style={{ padding: '4rem', textAlign: 'center', color: '#71717a' }}><FiMessageSquare size={48} style={{ opacity: 0.2, marginBottom: '1rem' }} /><h3>No new messages</h3></div>;
+        return <MessageManager />;
       case 'resume':
         return <ResumeManager />;
       case 'settings':
