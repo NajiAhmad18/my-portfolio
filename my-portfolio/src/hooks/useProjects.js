@@ -38,7 +38,6 @@ export const useProjects = () => {
     }, pollInterval);
 
     return () => {
-      window.removeEventListener('projectsUpdated', handleUpdate);
       channel.close();
       clearInterval(interval);
     };
