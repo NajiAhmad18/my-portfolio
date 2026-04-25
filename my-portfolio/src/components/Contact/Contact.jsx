@@ -30,7 +30,7 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
@@ -38,29 +38,37 @@ const Contact = () => {
     setIsSubmitting(true);
     setStatus('');
 
-    // TODO: Replace these with your actual EmailJS IDs
-    // Create an account at emailjs.com
-    const serviceID = 'service_ryez8ce';
-    const templateID = 'template_m6z4pup';
-    const publicKey = 'aEptkyFZEtknC7Khg';
+    const formData = new FormData(form.current);
+    const name = formData.get('user_name');
+    const email = formData.get('user_email');
+    const message = formData.get('message');
 
-    emailjs
-      .sendForm(serviceID, templateID, form.current, {
-        publicKey: publicKey,
-      })
-      .then(
-        () => {
-          setStatus('success');
-          form.current.reset();
-        },
-        (error) => {
-          console.error('FAILED...', error.text);
-          setStatus('error');
-        },
-      )
-      .finally(() => {
-        setIsSubmitting(false);
+    try {
+      // 1. Save to Database
+      const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/messages`;
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
       });
+
+      // 2. Send via EmailJS
+      const serviceID = 'service_ryez8ce';
+      const templateID = 'template_m6z4pup';
+      const publicKey = 'aEptkyFZEtknC7Khg';
+
+      await emailjs.sendForm(serviceID, templateID, form.current, {
+        publicKey: publicKey,
+      });
+
+      setStatus('success');
+      form.current.reset();
+    } catch (error) {
+      console.error('FAILED...', error);
+      setStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
