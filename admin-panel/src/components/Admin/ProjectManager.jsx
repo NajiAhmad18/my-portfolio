@@ -41,7 +41,7 @@ const ProjectManager = () => {
   };
 
   const handleAdd = () => {
-    const newId = Math.max(0, ...projects.map(p => p.id)) + 1;
+    const newId = projects.length > 0 ? Math.max(...projects.map(p => p.id || 0)) + 1 : 1;
     const newProject = {
       id: newId,
       title: 'New Project',
@@ -52,14 +52,16 @@ const ProjectManager = () => {
       techStack: ['React'],
       githubLink: '',
       demoLink: '',
-      color: '#3b82f6'
+      color: '#3b82f6',
+      isNew: true
     };
+    setProjects(prev => [newProject, ...prev]);
     startEdit(newProject);
   };
 
   const saveEdit = async () => {
     try {
-      const isExisting = projects.find(p => p.id === formData.id);
+      const isExisting = !formData.isNew;
       const method = isExisting ? 'PUT' : 'POST';
       const url = isExisting ? `${API_URL}/${formData.id}` : API_URL;
 
@@ -188,7 +190,12 @@ const ProjectManager = () => {
                   />
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
-                  <button onClick={() => setEditingId(null)} style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid #3f3f46', color: '#fff', borderRadius: '6px', cursor: 'pointer' }}><FiX /> Cancel</button>
+                  <button onClick={() => {
+                    setEditingId(null);
+                    if (project.isNew) {
+                      setProjects(prev => prev.filter(p => p.id !== project.id));
+                    }
+                  }} style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid #3f3f46', color: '#fff', borderRadius: '6px', cursor: 'pointer' }}><FiX /> Cancel</button>
                   <button onClick={saveEdit} style={{ padding: '0.5rem 1rem', background: '#10b981', border: 'none', color: '#fff', borderRadius: '6px', cursor: 'pointer' }}><FiSave /> Save Changes</button>
                 </div>
               </div>

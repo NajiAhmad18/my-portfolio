@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import { useSettings } from './hooks/useSettings';
 
 const Navbar = React.lazy(() => import('./components/Navbar/Navbar'));
 const Home = React.lazy(() => import('./components/Home/Home'));
@@ -72,6 +73,13 @@ const GlobalBackground = () => {
 
 function App() {
   const location = useLocation();
+  const settings = useSettings();
+
+  React.useEffect(() => {
+    if (settings.siteTitle) {
+      document.title = `${settings.siteTitle} | Portfolio`;
+    }
+  }, [settings.siteTitle]);
 
   return (
     <div className="app-container" style={{ position: 'relative' }}>
