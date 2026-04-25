@@ -14,9 +14,8 @@ const MagneticName = ({ firstName, lastName }) => {
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
-  const rotateX = useTransform(springY, [-0.5, 0.5], ['8deg', '-8deg']);
-  const rotateY = useTransform(springX, [-0.5, 0.5], ['-8deg', '8deg']);
-  const translateY = useTransform(springY, [-0.5, 0.5], ['-6px', '6px']);
+  const rotateX = useTransform(springY, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-8, 8]);
 
   const handleMouseMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
@@ -37,12 +36,30 @@ const MagneticName = ({ firstName, lastName }) => {
       className={styles.name}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, translateY, transformStyle: 'preserve-3d', perspective: 800 }}
+      style={{ 
+        rotateX: springY ? rotateX : 0, 
+        rotateY: springX ? rotateY : 0,
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+      }}
     >
-      <span>{firstName} </span>
-      <span className="text-gradient">{lastName}</span>
+      <span style={{ display: 'inline-block' }}>{firstName} </span>
+      <span className="text-gradient" style={{ display: 'inline-block' }}>{lastName}</span>
     </motion.h1>
   );
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const Hero = () => {
@@ -51,19 +68,6 @@ const Hero = () => {
   const nameParts = siteTitle?.split(' ') || ['Naji', 'Ahmad'];
   const firstName = nameParts.slice(0, -1).join(' ') || 'Naji';
   const lastName = nameParts[nameParts.length - 1] || 'Ahmad';
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
 
   return (
     <section id="hero" className={styles.hero}>
@@ -105,10 +109,13 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      <div className={styles.scrollIndicator}>
+      <motion.div 
+        variants={itemVariants}
+        className={styles.scrollIndicator}
+      >
         <span>Scroll</span>
         <FiChevronDown />
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -4,6 +4,9 @@ const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/
 
 export const useSettings = () => {
   const [settings, setSettings] = useState({ 
+    siteTitle: 'Naji Ahmad Javahir',
+    siteSubtitle: 'Software Engineering Undergraduate',
+    aboutText: 'Structured thinking. Clean code. Real solutions.',
     resumeUrl: '/Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf',
     resumeOriginalName: 'Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf'
   });
