@@ -1,33 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiMapPin, FiCode, FiTarget, FiStar } from 'react-icons/fi';
-import profileImg from '../../assets/profile.jpg';
-
+import { FiDownload, FiMapPin, FiMail, FiTerminal } from 'react-icons/fi';
 import styles from './About.module.css';
-import MetricsDashboard from './MetricsDashboard';
 import { useSettings } from '../../hooks/useSettings';
+import { useInteraction } from '../../hooks/useInteraction';
+import profileImg from '../../assets/profile.jpg';
+import MetricsDashboard from './MetricsDashboard';
 
 const About = () => {
-  const { aboutText, siteSubtitle } = useSettings();
-  const textVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
+  const { resumeUrl, resumeOriginalName } = useSettings();
+  const { triggerFeedback } = useInteraction();
+
+  const handleDownload = () => {
+    triggerFeedback('medium');
   };
 
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
-    }
-  };
-
-
+  const details = [
+    {
+      icon: <FiTerminal />,
+      label: 'Role',
+      value: 'Full-Stack Engineer',
+    },
+    {
+      icon: <FiMapPin />,
+      label: 'Location',
+      value: 'Colombo, Sri Lanka',
+    },
+    {
+      icon: <FiMail />,
+      label: 'Email',
+      value: 'naji.a.javahir@gmail.com',
+    },
+  ];
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -39,102 +43,95 @@ const About = () => {
 
   return (
     <section id="about" className={styles.about}>
-      {/* Decorative background elements */}
-      <div className={styles.bgBlob} />
-
       <div className="section-container">
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="section-title">About Me</h2>
-        </motion.div>
 
-        <div className={styles.contentGrid}>
+        <div className={styles.grid}>
+
+          {/* ── LEFT SIDE (Image) ── */}
           <motion.div
-            className={styles.imageSection}
-            variants={imageVariants}
-            initial="hidden"
-            whileInView="visible"
+            className={styles.photoCol}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
           >
-            <div className={styles.imageCard} onMouseMove={handleMouseMove}>
-              <div className={styles.imageInner}>
-                <img src={profileImg} alt="Naji Ahmad Javahir" className={styles.profileImage} />
-                <div className={styles.imageOverlay} />
+            <div
+              className={styles.imageContainer}
+              onMouseMove={handleMouseMove}
+            >
+              <div className={styles.imageWrapper}>
+                <img
+                  src={profileImg}
+                  alt="Naji Ahmad Javahir"
+                  className={styles.image}
+                />
               </div>
-              <div className={styles.cardDecoration} />
             </div>
           </motion.div>
 
+          {/* ── RIGHT SIDE (Content) ── */}
           <motion.div
-            className={styles.textSection}
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
+            className={styles.content}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1 }}
           >
-            <div className={styles.introBox}>
-              <span className={styles.hello}>Hello! I'm Naji</span>
-              <p className={styles.description}>
-                {!aboutText || aboutText === 'Structured thinking. Clean code. Real solutions.'
-                  ? "Software Engineering Undergraduate building full-stack applications and exploring scalable system design."
-                  : aboutText}
-              </p>
+            <div className={styles.header}>
+              <span className="moduleLabel">MODULE: ABOUT</span>
+              <h2 className="roleTitle">Full-Stack Engineer</h2>
             </div>
 
-            <div className={styles.highlightsGrid}>
-              <div className={styles.highlightCard}>
-                <div className={styles.cardIcon}><FiMapPin /></div>
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardLabel}>Location</span>
-                  <span className={styles.cardValue}>Colombo, Sri Lanka</span>
-                </div>
-              </div>
+            <p className={styles.focusLine}>
+              Focused on backend systems, API design, and structured full-stack development.
+            </p>
 
-              <div className={styles.highlightCard}>
-                <div className={styles.cardIcon}><FiCode /></div>
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardLabel}>Experience</span>
-                  <span className={styles.cardValue}>{siteSubtitle || 'Software Engineering Undergraduate'}</span>
-                </div>
-              </div>
+            <p className={styles.text}>
+              I build practical software with clean architecture, database design, and performance-aware implementation.
+            </p>
 
-              <div className={styles.highlightCard}>
-                <div className={styles.cardIcon}><FiStar /></div>
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardLabel}>Education</span>
-                  <span className={styles.cardValue}>BSc (Hons) in Software Engineering (Reading)</span>
-                </div>
-              </div>
+            <p className={styles.availabilityLine}>
+              Available for internships and junior engineering roles.
+            </p>
 
-              <div className={styles.highlightCard}>
-                <div className={styles.cardIcon}><FiTarget /></div>
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardLabel}>Goal</span>
-                  <span className={styles.cardValue}>Focused on building reliable, efficient, and scalable systems</span>
-                </div>
-              </div>
-
-              <div className={styles.highlightCard}>
-                <div className={styles.cardIcon}><FiStar /></div>
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardLabel}>Focus</span>
-                  <div className={styles.focusBadges}>
-                    <span className={styles.badge}>Clean code</span>
-                    <span className={styles.badge}>System design</span>
-                    <span className={styles.badge}>Real-world problem solving</span>
+            {/* Key Details Grid */}
+            <div className={styles.detailsGrid}>
+              {details.map((item, i) => (
+                <div key={i} className={styles.detailItem}>
+                  <div>
+                    <span className={styles.detailLabel}>{item.label}</span>
+                    <span className={styles.detailValue}>{item.value}</span>
                   </div>
                 </div>
+              ))}
+
+              <div className={styles.detailItem}>
+                <div>
+                  <span className={styles.detailLabel}>Resume</span>
+                  <a
+                    href={
+                      resumeUrl
+                        ? `${resumeUrl}${resumeUrl.includes('?') ? '&' : '?'}v=${Date.now()}`
+                        : '/Naji_Ahmad_Javahir_Software_Engineering_Intern.pdf'
+                    }
+                    download={resumeOriginalName || 'Naji_Ahmad_Resume.pdf'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.downloadLink}
+                    onClick={handleDownload}
+                  >
+                    <FiDownload /> Download
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
+
         </div>
 
+        {/* ── Metrics Dashboard ── */}
         <MetricsDashboard />
+
       </div>
     </section>
   );
