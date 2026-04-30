@@ -64,7 +64,7 @@ const Footer = () => {
               NAJI.
             </Link>
             <p className={styles.bio}>
-              Software Engineering student passionate about building scalable, practical solutions. Let's connect and build something amazing together.
+              Software engineer building reliable backend services and clean web interfaces. Open to work and client projects — let's connect.
             </p>
           </div>
 
