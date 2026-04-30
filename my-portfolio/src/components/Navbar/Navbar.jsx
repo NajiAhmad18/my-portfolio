@@ -5,10 +5,11 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import Logo from '../Logo/Logo';
 import styles from './Navbar.module.css';
-
 import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { useInteraction } from '../../hooks/useInteraction';
 
 const Navbar = () => {
+  const { triggerFeedback } = useInteraction();
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -112,7 +113,10 @@ const Navbar = () => {
           </motion.div>
           <motion.button 
             className={styles.mobileMenuBtn} 
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => {
+              triggerFeedback('light');
+              setMobileOpen(!mobileOpen);
+            }}
             aria-label="Toggle menu"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

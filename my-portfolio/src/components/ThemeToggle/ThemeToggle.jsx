@@ -3,10 +3,13 @@ import { FiSun, FiMoon, FiMonitor } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './ThemeToggle.module.css';
 
+import { useInteraction } from '../../hooks/useInteraction';
+
 const ThemeToggle = () => {
   const { theme, setTheme, activeTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { triggerFeedback } = useInteraction();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,7 +31,10 @@ const ThemeToggle = () => {
     <div className={styles.toggleContainer} ref={dropdownRef}>
       <button 
         className={styles.toggleBtn} 
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          triggerFeedback('light');
+          setIsOpen(!isOpen);
+        }}
         aria-label="Toggle theme"
       >
         {activeTheme === 'dark' ? <FiMoon /> : <FiSun />}
@@ -41,6 +47,7 @@ const ThemeToggle = () => {
               key={option.value}
               className={`${styles.optionBtn} ${theme === option.value ? styles.active : ''}`}
               onClick={() => {
+                triggerFeedback('medium');
                 setTheme(option.value);
                 setIsOpen(false);
               }}
