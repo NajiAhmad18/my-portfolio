@@ -47,14 +47,10 @@ const ParticlesBg = () => {
       },
       particles: {
         color: {
-          value: ["#6366f1", "#ec4899"],
+          value: ["#06B6D4", "#3B82F6"],
         },
         links: {
-          color: activeTheme === 'light' ? "#0f172a" : "#ffffff",
-          distance: 150,
-          enable: true,
-          opacity: 0.2,
-          width: 1,
+          enable: false,
         },
         move: {
           direction: "none",
