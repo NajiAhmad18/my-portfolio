@@ -100,7 +100,11 @@ const TiltCard = ({ project, onClick }) => {
           <button
             className={styles.linkBtn}
             onClick={(e) => { e.stopPropagation(); if (project.githubLink && project.githubLink !== '#') window.open(project.githubLink, '_blank'); }}
-            style={{ '--card-color': project.color }}
+            style={{ 
+              '--card-color': project.color,
+              opacity: project.githubLink && project.githubLink !== '#' ? 1 : 0.4,
+              cursor: project.githubLink && project.githubLink !== '#' ? 'pointer' : 'not-allowed'
+            }}
           >
             <FiGithub /> Source
           </button>

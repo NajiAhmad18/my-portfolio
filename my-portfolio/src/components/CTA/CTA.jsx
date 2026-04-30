@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import styles from './CTA.module.css';
 import { useInteraction } from '../../hooks/useInteraction';
 
 const CTA = () => {
   const { triggerFeedback } = useInteraction();
+  const navigate = useNavigate();
   const terminalRef = useRef(null);
 
   const handleMouseMove = (e) => {
@@ -19,7 +21,7 @@ const CTA = () => {
 
   const handleAction = () => {
     triggerFeedback('medium');
-    window.location.href = '/contact';
+    navigate('/contact');
   };
 
   return (

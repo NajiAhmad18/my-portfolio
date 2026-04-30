@@ -38,7 +38,12 @@ const ArticleCard = ({ article }) => {
           className={styles.readMore} 
           target="_blank" 
           rel="noopener noreferrer"
-          onClick={() => triggerFeedback('light')}
+          onClick={(e) => { if (article.link === '#') e.preventDefault(); else triggerFeedback('light'); }}
+          style={{
+            opacity: article.link === '#' ? 0.4 : 1,
+            cursor: article.link === '#' ? 'not-allowed' : 'pointer',
+            pointerEvents: article.link === '#' ? 'none' : 'auto'
+          }}
         >
           Read Publication <FiArrowRight />
         </a>
