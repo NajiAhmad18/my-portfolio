@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 import { useInteraction } from '../../hooks/useInteraction';
 const HeroScene = React.lazy(() => import('./HeroScene'));
@@ -140,13 +141,13 @@ const Hero = () => {
             >
               View Projects
             </button>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className={styles.secondaryAction}
               onClick={() => triggerFeedback('light')}
             >
               Contact Me
-            </a>
+            </Link>
           </div>
         </motion.div>
 

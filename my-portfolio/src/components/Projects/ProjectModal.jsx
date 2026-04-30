@@ -112,7 +112,9 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                   padding: '10px 20px',
                   border: '1px solid var(--card-border)',
                   borderRadius: '4px',
-                  background: 'var(--bg-dark)'
+                  background: 'var(--bg-dark)',
+                  pointerEvents: project.githubLink === '#' ? 'none' : 'auto',
+                  opacity: project.githubLink === '#' ? 0.4 : 1
                 }}
               >
                 <FiGithub /> Source Code
