@@ -17,7 +17,6 @@ const PageTransition = React.lazy(() => import('./components/PageTransition'));
 const ScrollToTop = React.lazy(() => import('./components/ScrollToTop'));
 const HeroScene = React.lazy(() => import('./components/Hero/HeroScene'));
 const ParticlesBg = React.lazy(() => import('./components/Hero/ParticlesBg'));
-const LiquidBlobs = React.lazy(() => import('./components/LiquidBlobs/LiquidBlobs'));
 
 // Check WebGL support before rendering 3D
 const checkWebGL = () => {
@@ -47,7 +46,7 @@ class SceneErrorBoundary extends React.Component {
 
 const GlobalBackground = () => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 1200, 3000], [0.85, 0.5, 0.25]);
+  const opacity = useTransform(scrollY, [0, 800, 2400], [1, 0.6, 0.2]);
   const webGLSupported = React.useMemo(() => checkWebGL(), []);
 
   return (
@@ -61,10 +60,17 @@ const GlobalBackground = () => {
         opacity,
       }}
     >
+      {/* Subtle dot-grid overlay */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: 'radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+      }} />
+
       <SceneErrorBoundary>
         <Suspense fallback={null}>
           <ParticlesBg />
-          {webGLSupported && <HeroScene />}
         </Suspense>
       </SceneErrorBoundary>
     </motion.div>
@@ -83,8 +89,6 @@ function App() {
 
   return (
     <div className="app-container" style={{ position: 'relative' }}>
-      {/* Liquid blob ambient background */}
-      <Suspense fallback={null}><LiquidBlobs /></Suspense>
       {/* Fixed 3D background that fades as you scroll */}
       <GlobalBackground />
 
