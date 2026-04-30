@@ -24,13 +24,13 @@ const Logo = ({ size = 40 }) => (
       position: 'absolute', 
       width: '100%', 
       height: '100%', 
-      background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)' 
+      background: 'radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%)' 
     }} />
     
     <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <motion.path 
         d="M6 18L6 6L18 18L18 6" 
-        stroke="#6366f1" 
+        stroke="#14B8A6" 
         strokeWidth="2.5" 
         strokeLinecap="round" 
         strokeLinejoin="round"
@@ -46,7 +46,7 @@ const Logo = ({ size = 40 }) => (
       {/* Floating Prompt Cursor */}
       <motion.rect 
         x="19" y="5" width="2" height="4" 
-        fill="#8b5cf6" 
+        fill="#2DD4BF" 
         animate={{ opacity: [0, 1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity }}
       />
