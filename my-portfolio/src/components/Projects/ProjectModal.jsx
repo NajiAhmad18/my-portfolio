@@ -84,22 +84,36 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
             <ArchitectureVisualizer projectId={project.id} />
 
-            <div className={styles.links} style={{ marginTop: '3rem' }}>
-              <a 
-                href={project.demoLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+            <div className={styles.links} style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--card-border)' }}>
+              <a
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.linkBtn}
-                style={{ '--card-color': project.color }}
+                style={{
+                  '--card-color': project.color,
+                  padding: '10px 20px',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: '4px',
+                  background: 'var(--bg-dark)',
+                  pointerEvents: project.demoLink === '#' ? 'none' : 'auto',
+                  opacity: project.demoLink === '#' ? 0.4 : 1
+                }}
               >
                 <FiExternalLink /> Live Demo
               </a>
-              <a 
-                href={project.githubLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.linkBtn}
-                style={{ '--card-color': project.color }}
+                style={{
+                  '--card-color': project.color,
+                  padding: '10px 20px',
+                  border: '1px solid var(--card-border)',
+                  borderRadius: '4px',
+                  background: 'var(--bg-dark)'
+                }}
               >
                 <FiGithub /> Source Code
               </a>

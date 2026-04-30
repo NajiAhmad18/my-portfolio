@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink, FiGithub } from 'react-icons/fi';
 import { useProjects } from '../../hooks/useProjects';
 import ProjectModal from './ProjectModal';
 import styles from './Projects.module.css';
@@ -26,7 +26,6 @@ const TiltCard = ({ project, onClick }) => {
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -91,7 +90,18 @@ const TiltCard = ({ project, onClick }) => {
         </div>
 
         <div className={styles.links}>
-          <button className={styles.linkBtn} onClick={(e) => { e.stopPropagation(); window.open(project.githubLink, '_blank'); }}>
+          <button
+            className={styles.linkBtn}
+            onClick={(e) => { e.stopPropagation(); if (project.demoLink && project.demoLink !== '#') window.open(project.demoLink, '_blank'); }}
+            style={{ '--card-color': project.color, opacity: project.demoLink && project.demoLink !== '#' ? 1 : 0.4, cursor: project.demoLink && project.demoLink !== '#' ? 'pointer' : 'not-allowed' }}
+          >
+            <FiExternalLink /> Live Demo
+          </button>
+          <button
+            className={styles.linkBtn}
+            onClick={(e) => { e.stopPropagation(); if (project.githubLink && project.githubLink !== '#') window.open(project.githubLink, '_blank'); }}
+            style={{ '--card-color': project.color }}
+          >
             <FiGithub /> Source
           </button>
         </div>
@@ -107,15 +117,10 @@ const Projects = () => {
   return (
     <section id="projects" className={styles.projects}>
       <div className="section-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Featured Projects
-        </motion.h2>
+        <div className={styles.header}>
+          <span className="moduleLabel">MODULE: PROJECTS</span>
+          <h2 className="moduleTitle">Deployed Systems</h2>
+        </div>
 
         <div className={styles.grid}>
           {projects.map(project => (

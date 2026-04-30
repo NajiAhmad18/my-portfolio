@@ -1,161 +1,108 @@
 .skills {
-  padding: var(--section-padding);
-  background-color: transparent;
-  position: relative;
+  padding: 0;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 32px;
 }
 
 .tabs {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
+  gap: 10px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tabBtn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  padding: 8px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--card-border);
   color: var(--text-muted);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all var(--transition-fast);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .tabBtn:hover {
-  color: var(--text-main);
-  background: var(--glass-bg);
   border-color: var(--accent-primary);
+  color: var(--text-main);
 }
 
 .tabBtn.active {
-  background: var(--accent-gradient);
+  background: var(--accent-primary);
   color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  font-weight: 700;
+  border-color: var(--accent-primary);
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1.5rem;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
 }
 
 .skillCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--glass-bg);
-  border-radius: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--card-border);
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: default;
-  overflow: hidden;
-  padding: 2px;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 12px;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  position: relative;
+  width: 130px;
+  min-width: 120px;
 }
 
 .skillCard:hover {
-  transform: translateY(-8px);
-}
-
-.skillCard::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(150px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-      var(--accent-primary),
-      transparent 40%);
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.skillCard:hover::before {
-  opacity: 1;
-}
-
-.skillCardInner {
-  position: relative;
-  width: 100%;
-  height: 100%;
   background: var(--bg-darker);
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  z-index: 1;
-  backdrop-filter: blur(5px);
-  transition: background 0.3s ease;
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
 }
-
-.skillCard:hover .skillCardInner {
-  background: var(--card-bg);
-}
-
 
 .iconWrapper {
-  font-size: 2.5rem;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.iconWrapper svg {
-  transition: filter 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 2;
 }
 
 .skillCard:hover .iconWrapper {
-  transform: scale(1.15) translateY(-5px);
-  filter: drop-shadow(0 0 10px currentColor);
-  animation: smoothFloat 3s ease-in-out infinite;
-}
-
-@keyframes smoothFloat {
-
-  0%,
-  100% {
-    transform: scale(1.15) translateY(-5px) rotate(0deg);
-  }
-
-  50% {
-    transform: scale(1.15) translateY(-12px) rotate(5deg);
-  }
+  transform: scale(1.15) translateY(-2px);
 }
 
 .skillName {
   font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-  margin-top: 0.5rem;
-}
-
-.skillCard:hover .skillName {
+  font-size: 0.82rem;
   color: var(--text-main);
-  transform: translateY(-2px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 @media (max-width: 600px) {
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 1rem;
+    gap: 12px;
   }
-
-  .iconWrapper {
-    font-size: 2.5rem;
+  .skillCard {
+    width: 110px;
+    min-width: 100px;
   }
 }
