@@ -1,13 +1,45 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '../../context/ThemeContext';
 import { useProjects } from '../../hooks/useProjects';
 import { useSkills } from '../../hooks/useSkills';
 import { FiGithub, FiCode, FiBox, FiCoffee } from 'react-icons/fi';
+import styles from './MetricsDashboard.module.css';
+
+const MetricCard = ({ metric, index }) => {
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty('--mouse-x', `${x}px`);
+    cardRef.current.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className={`${styles.metricCard} spotlight`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.4 }}
+    >
+      <div className={styles.iconWrapper}>
+        <metric.icon />
+      </div>
+      
+      <div className={styles.content}>
+        <div className={styles.value}>{metric.value}</div>
+        <div className={styles.label}>{metric.label}</div>
+      </div>
+    </motion.div>
+  );
+};
 
 const MetricsDashboard = () => {
-  const { activeTheme } = useTheme();
-  const isDark = activeTheme === 'dark';
   const projects = useProjects();
   const skillsGrouped = useSkills();
 
@@ -24,81 +56,32 @@ const MetricsDashboard = () => {
       id: 1, 
       label: 'Projects Completed', 
       value: projectCount, 
-      icon: FiBox, 
-      color: '#3b82f6' 
+      icon: FiBox
     },
     { 
       id: 2, 
       label: 'Technologies Used', 
       value: skillCount, 
-      icon: FiCode, 
-      color: '#10b981' 
+      icon: FiCode
     },
-    { id: 3, label: 'GitHub Commits', value: '500+', icon: FiGithub, color: '#8b5cf6' },
-    { id: 4, label: 'Cups of Coffee', value: '∞', icon: FiCoffee, color: '#f59e0b' },
+    { id: 3, label: 'GitHub Commits', value: '500+', icon: FiGithub },
+    { id: 4, label: 'Cups of Coffee', value: '∞', icon: FiCoffee },
   ];
 
-
   return (
-    <div style={{ marginTop: '4rem' }}>
+    <div className={styles.dashboard}>
       <motion.h3 
+        className={styles.title}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        style={{ fontSize: '1.5rem', marginBottom: '1.5rem', textAlign: 'center', color: isDark ? '#f4f4f5' : '#18181b' }}
       >
         By The Numbers
       </motion.h3>
       
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '1.5rem'
-      }}>
+      <div className={styles.grid}>
         {metrics.map((metric, index) => (
-          <motion.div
-            key={metric.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            style={{
-              padding: '1.5rem',
-              borderRadius: '12px',
-              background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)',
-              border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '1rem',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-            whileHover={{ y: -5, boxShadow: `0 10px 30px -10px ${metric.color}40` }}
-          >
-            <div style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              background: `${metric.color}20`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: metric.color,
-              fontSize: '1.5rem'
-            }}>
-              <metric.icon />
-            </div>
-            
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', fontWeight: 700, color: isDark ? '#fff' : '#000', marginBottom: '0.25rem' }}>
-                {metric.value}
-              </div>
-              <div style={{ fontSize: '0.9rem', color: isDark ? '#a1a1aa' : '#52525b' }}>
-                {metric.label}
-              </div>
-            </div>
-          </motion.div>
+          <MetricCard key={metric.id} metric={metric} index={index} />
         ))}
       </div>
     </div>
@@ -106,4 +89,3 @@ const MetricsDashboard = () => {
 };
 
 export default MetricsDashboard;
-

@@ -1,288 +1,194 @@
 .about {
-  padding: var(--section-padding) 0;
-  background-color: transparent;
-  position: relative;
-  overflow: hidden;
+  padding: 0;
 }
 
-/* Animated Background Blobs */
-.bgBlob {
-  position: absolute;
-  top: 10%;
-  right: -5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
-  filter: blur(80px);
-  opacity: 0.08;
-  z-index: 0;
-  pointer-events: none;
-  animation: float 15s infinite alternate;
-}
-
-@keyframes float {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-
-  to {
-    transform: translate(-50px, 50px) scale(1.1);
-  }
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 3rem;
-  position: relative;
-  z-index: 1;
-}
-
-.svgWrapper {
-  width: 120px;
-  flex-shrink: 0;
-  opacity: 0.85;
-}
-
-.contentGrid {
+/* 2-column: photo | content */
+.grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 6rem;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  grid-template-columns: 280px 1fr;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 60px;
 }
 
-/* Image Section Redesign */
-.imageSection {
-  position: relative;
+/* ── LEFT col (Image) ── */
+.photoCol {
+  display: flex;
+  justify-content: flex-start;
 }
 
-.imageCard {
+/* Container for the image and the floating background frame */
+.imageContainer {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 320px;
+  aspect-ratio: 0.85 / 1;
+  z-index: 1;
+  padding: 0;
   margin: 0 auto;
 }
 
-.imageInner {
-  position: relative;
+/* The floating background outline from the screenshot */
+.imageContainer::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border: 1px solid rgba(20, 184, 166, 0.25); /* Subtle accent line */
+  border-radius: 50px;
+  z-index: -1;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.imageContainer:hover::before {
+  border-color: var(--accent-primary);
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  opacity: 0.8;
+}
+
+/* Photo wrapper with large border radius */
+.imageWrapper {
+  width: 100%;
+  height: 100%;
   border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--glass-border);
-  aspect-ratio: 4/5;
-  background: var(--bg-darker);
+  position: relative;
   z-index: 2;
-  transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background: var(--bg-darker);
 }
 
-.imageCard:hover .imageInner {
-  transform: scale(1.02) translateY(-10px);
-}
-
-.profileImage {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 10%;
-  transition: transform 0.8s ease;
+  object-position: center top;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.imageCard:hover .profileImage {
+.imageContainer:hover .image {
   transform: scale(1.05);
 }
 
-.imageOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--bg-dark) 0%, transparent 40%);
-  opacity: 0.6;
-}
-
-/* Decorative Card Behind Image */
-.cardDecoration {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--accent-primary);
-  border-radius: 40px;
-  opacity: 0.2;
-  z-index: 1;
-  transition: all 0.5s ease;
-}
-
-.imageCard:hover .cardDecoration {
-  transform: translate(10px, 10px) rotate(2deg);
-  opacity: 0.4;
-}
-
-/* Text Section Redesign */
-.textSection {
+/* ── RIGHT col (Content) ── */
+.content {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 20px;
 }
 
-.introBox {
-  position: relative;
+.header {
+  margin-bottom: 12px;
 }
 
-.introTopRow {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.introText {
-  flex: 1;
-}
-
-.hello {
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 1.5rem;
-  padding-left: 50px;
-  position: relative;
-}
-
-.hello::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 35px;
-  height: 2px;
-  background: var(--accent-gradient);
-}
-
-.description {
-  font-size: 1.3rem;
-  line-height: 1.7;
-  color: var(--text-main);
+:global(.roleTitle) {
   font-family: var(--font-heading);
+  font-size: var(--heading-size);
+  font-weight: var(--heading-weight);
+  color: var(--text-main);
+  letter-spacing: var(--heading-spacing);
+  line-height: 1.1;
 }
 
-/* Highlights Grid Redesign */
-.highlightsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.highlightCard {
-  background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--glass-border);
-  padding: 1.2rem 1.5rem;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.highlightCard:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--accent-primary);
-  transform: translateX(10px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-}
-
-.cardIcon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  background: var(--accent-gradient);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  color: #fff;
-  box-shadow: 0 4px 15px -5px rgba(99, 102, 241, 0.5);
-}
-
-.cardInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.cardLabel {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.cardValue {
-  font-size: 0.95rem;
+.focusLine {
+  font-size: 1.25rem;
   color: var(--text-main);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.focusBadges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 4px;
+.text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 
-.badge {
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+.availabilityLine {
+  font-size: 0.95rem;
   color: var(--accent-primary);
-  border-radius: 100px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.availabilityLine::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  margin-right: 10px;
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* Details grid */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--card-border);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.detailValue {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.downloadLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: var(--accent-primary);
+  text-decoration: none;
   font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.highlightCard:hover .badge {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: var(--accent-primary);
-  transform: scale(1.05);
+.downloadLink:hover {
+  color: var(--text-main);
+  transform: translateX(4px);
 }
 
-@media (max-width: 1024px) {
-  .contentGrid {
+@media (max-width: 960px) {
+  .grid {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 40px;
   }
-
-  .textSection {
-    order: 2;
-  }
-
-  .imageSection {
-    order: 1;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .description {
-    font-size: 1.15rem;
+  .imageWrapper {
+    max-width: 300px;
   }
 }
-
-@media (max-width: 600px) {
-  .highlightsGrid {
+@media (max-width: 500px) {
+  .detailsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .header {
-    margin-bottom: 3rem;
   }
 }
