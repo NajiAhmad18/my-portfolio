@@ -1,28 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { SiLeetcode, SiHackerrank } from 'react-icons/si';
+import { SiLeetcode, SiGeeksforgeeks, SiGithub, SiCodeforces } from 'react-icons/si';
+import { FiExternalLink } from 'react-icons/fi';
 import styles from './CodingProfiles.module.css';
 
 const CodingProfiles = () => {
   const profiles = [
     {
       name: 'GitHub',
-      icon: <FiGithub />,
+      icon: <SiGithub />,
       link: 'https://github.com/NajiAhmad18',
       color: 'var(--text-main)'
     },
     {
       name: 'LeetCode',
       icon: <SiLeetcode />,
-      link: 'https://leetcode.com/u/NajiAhmad/',
+      link: 'https://leetcode.com/najiahmad/',
       color: '#FFA116'
     },
     {
-      name: 'HackerRank',
-      icon: <SiHackerrank />,
-      link: 'https://www.hackerrank.com/profile/naji_a_javahir',
-      color: '#00EA64'
+      name: 'GeeksforGeeks',
+      icon: <SiGeeksforgeeks />,
+      link: 'https://auth.geeksforgeeks.org/user/najiahmad/',
+      color: '#2F8D46'
+    },
+    {
+      name: 'Codeforces',
+      icon: <SiCodeforces />,
+      link: 'https://codeforces.com/profile/najiahmad',
+      color: '#1F8ACB'
     }
   ];
 
@@ -43,8 +49,6 @@ const CodingProfiles = () => {
     }
   };
 
-
-
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -56,15 +60,10 @@ const CodingProfiles = () => {
   return (
     <section id="profiles" className={styles.profiles}>
       <div className="section-container">
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          Coding Profiles
-        </motion.h2>
+        <div className={styles.header}>
+          <span className="moduleLabel">MODULE: PROFILES</span>
+          <h2 className="moduleTitle">Coding Profiles</h2>
+        </div>
 
         <motion.div 
           className={styles.container}
@@ -82,14 +81,16 @@ const CodingProfiles = () => {
               className={styles.profileCard}
               variants={itemVariants}
               onMouseMove={handleMouseMove}
-              style={{ '--icon-color': profile.color }}
+              style={{ '--accent-primary': profile.color }}
             >
               <div className={styles.profileCardInner}>
-                <div className={styles.iconWrapper}>
+                <div 
+                  className={styles.iconWrapper}
+                  style={{ '--icon-color': profile.color }}
+                >
                   {profile.icon}
                 </div>
                 <span className={styles.platformName}>{profile.name}</span>
-                <FiExternalLink className={styles.externalIcon} />
               </div>
             </motion.a>
           ))}
