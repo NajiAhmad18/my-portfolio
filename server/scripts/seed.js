@@ -8,12 +8,12 @@ const Skill = require('../models/Skill');
 const projectsData = [
   {
     id: 1,
-    title: "Healthcare Microservices Platform",
-    shortDesc: "A full-stack MERN application with an API Gateway architecture and microservices.",
-    description: "Developed a scalable backend using 8+ independently deployable microservices. Features include patient and doctor management, appointment booking, video consultations (telemedicine), an AI-based symptom checker, payment processing, and real-time notifications.",
+    title: "CareBridge - Healthcare Microservices Platform",
+    shortDesc: "MERN-based healthcare platform utilizing microservices architecture and an API Gateway.",
+    description: "Built CareBridge, a MERN-based healthcare platform using a microservices architecture and an API Gateway for patient, doctor, and appointment management. Developed 8+ microservices for telemedicine, AI symptom checking, payments, and real-time notifications using RESTful APIs. Improved scalability and maintainability through independently deployable services.",
     problem: "Traditional monolithic healthcare systems struggle to scale and are difficult to maintain when handling complex, concurrent tasks like telemedicine, booking, and AI diagnosis simultaneously.",
-    solution: "Designed a distributed microservices architecture with an API Gateway. This decoupled services, allowed independent scaling for high-traffic components like telemedicine, and ensured continuous availability.",
-    techStack: ["React", "Node.js", "Express.js", "MongoDB", "Microservices", "REST API"],
+    solution: "Decoupled the core application into 8+ independently deployable microservices orchestrated by an API Gateway, facilitating independent scaling and high availability.",
+    techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "REST APIs", "Microservices", "API Gateway"],
     demoLink: "https://github.com/ShafnyHadhy/health_care_appointment-microservices",
     githubLink: "https://github.com/ShafnyHadhy/health_care_appointment-microservices",
     color: "#6366f1"

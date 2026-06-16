@@ -61,7 +61,7 @@ const useParallax = (mouseVal, range) => {
   return useTransform(mouseVal || useMotionValue(0), [-0.5, 0.5], [-range, range]);
 };
 
-// 1. Healthcare Microservices Platform
+// 1. CareBridge - Healthcare Microservices Platform
 export const HealthcareIcon = ({ color, theme, mouseX, mouseY }) => {
   const t = getThemeColors(theme);
   const px1 = useParallax(mouseX, 10);
