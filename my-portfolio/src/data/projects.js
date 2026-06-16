@@ -25,12 +25,12 @@ export const projectsData = [
   },
   {
     id: 3,
-    title: "Smart Vacation Home Rental",
-    shortDesc: "Full-stack MERN application for property listings and bookings.",
-    description: "A comprehensive vacation home rental platform allowing users to browse property listings, book stays, leave reviews, and process payments securely. Built with MVC architecture on the backend.",
-    problem: "Finding and booking vacation homes often involves fragmented platforms, poor UI, and lack of transparent reviews.",
-    solution: "Built a unified, seamless booking experience with robust search filters, an integrated secure payment gateway, and a transparent review system to build trust between hosts and guests.",
-    techStack: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
+    title: "LuxeKey – Vacation Home Rental Platform",
+    shortDesc: "Full-stack vacation rental platform with role-based access control and Stripe payments.",
+    description: "Built LuxeKey, a vacation rental platform featuring role-based access control for Guest, Host, and Admin users. Developed a booking system with property search, availability tracking, host dashboards, and analytics. Integrated Stripe API for secure payments, and implemented real-time notifications and wishlists with Zustand. Enhanced booking efficiency with seamless reservations and secure transactions.",
+    problem: "Traditional vacation rental platforms lack clear role isolation for Guest and Host features, suffer from clunky payment integrations, and struggle to sync user states like wishlists in real time.",
+    solution: "Engineered LuxeKey, a full-stack platform separating Guest, Host, and Admin features with secure dashboards. Integrated Stripe API for payments and leveraged Zustand for smooth, real-time client-side wishlist management.",
+    techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Stripe API", "Zustand", "JWT", "REST API"],
     demoLink: "#",
     githubLink: "https://github.com/NajiAhmad18",
     color: "#14b8a6"

@@ -152,7 +152,7 @@ export const RevolveIcon = ({ color, theme, mouseX, mouseY }) => {
   );
 };
 
-// 3. Smart Vacation Home Rental
+// 3. LuxeKey – Vacation Home Rental Platform
 export const VacationIcon = ({ color, theme, mouseX, mouseY }) => {
   const t = getThemeColors(theme);
   const px1 = useParallax(mouseX, 12);
