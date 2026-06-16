@@ -38,8 +38,8 @@ const projectsData = [
     problem: "Traditional vacation rental platforms lack clear role isolation for Guest and Host features, suffer from clunky payment integrations, and struggle to sync user states like wishlists in real time.",
     solution: "Engineered LuxeKey, a full-stack platform separating Guest, Host, and Admin features with secure dashboards. Integrated Stripe API for payments and leveraged Zustand for smooth, real-time client-side wishlist management.",
     techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Stripe API", "Zustand", "JWT", "REST API"],
-    demoLink: "#",
-    githubLink: "https://github.com/NajiAhmad18",
+    demoLink: "https://vacation-home-rental-platform.vercel.app/",
+    githubLink: "https://github.com/NajiAhmad18/vacation-home-rental-platform",
     color: "#14b8a6"
   },
   {
