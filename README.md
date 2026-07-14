@@ -12,11 +12,11 @@
   <a href="https://najiahmad.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Live%20Demo-najiahmad.vercel.app-6366f1?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
   </a>
-  &nbsp;
+   
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" />
-  &nbsp;
+   
   <img src="https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-  &nbsp;
+   
   <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
 </p>
 
@@ -30,17 +30,18 @@ This is a **full-stack portfolio application** built from the ground up to showc
 
 The project is split into three independent workspaces:
 
-| Workspace | Description | Port |
-|---|---|---|
-| `my-portfolio` | Public-facing React + Vite frontend | `5173` |
-| `server` | Express.js REST API + MongoDB backend | `5001` |
-| `admin-panel` | Private React CMS dashboard | `5174` |
+| Workspace        | Description                           | Port     |
+| ---------------- | ------------------------------------- | -------- |
+| `my-portfolio` | Public-facing React + Vite frontend   | `5173` |
+| `server`       | Express.js REST API + MongoDB backend | `5001` |
+| `admin-panel`  | Private React CMS dashboard           | `5174` |
 
 ---
 
 ## ✨ Features
 
 ### 🌐 Portfolio Frontend (`my-portfolio`)
+
 - **Interactive 3D background** powered by Three.js / React Three Fiber with WebGL detection & graceful fallback
 - **Particle system** with `@tsparticles` for ambient visual effects
 - **Smooth page transitions** via Framer Motion with `AnimatePresence`
@@ -53,6 +54,7 @@ The project is split into three independent workspaces:
 - **Deployed on Vercel** with SPA rewrite rules
 
 ### ⚙️ Backend API (`server`)
+
 - **Express.js** REST API (v5)
 - **MongoDB Atlas** via Mongoose ODM
 - **File uploads** with Multer (PDF resume management)
@@ -62,23 +64,24 @@ The project is split into three independent workspaces:
 
 #### API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/projects` | Fetch all projects |
-| `POST` | `/api/projects` | Create a new project |
-| `PUT` | `/api/projects/:id` | Update a project |
-| `DELETE` | `/api/projects/:id` | Delete a project |
-| `GET` | `/api/skills` | Fetch all skills |
-| `POST` | `/api/skills` | Add a new skill |
-| `GET` | `/api/messages` | Fetch all contact messages |
-| `POST` | `/api/messages` | Submit a contact message |
-| `PUT` | `/api/messages/:id/read` | Mark a message as read |
-| `DELETE` | `/api/messages/:id` | Delete a message |
-| `GET` | `/api/settings` | Fetch site settings |
-| `POST` | `/api/settings` | Update site settings |
-| `POST` | `/api/upload-resume` | Upload a PDF resume |
+| Method     | Endpoint                   | Description                |
+| ---------- | -------------------------- | -------------------------- |
+| `GET`    | `/api/projects`          | Fetch all projects         |
+| `POST`   | `/api/projects`          | Create a new project       |
+| `PUT`    | `/api/projects/:id`      | Update a project           |
+| `DELETE` | `/api/projects/:id`      | Delete a project           |
+| `GET`    | `/api/skills`            | Fetch all skills           |
+| `POST`   | `/api/skills`            | Add a new skill            |
+| `GET`    | `/api/messages`          | Fetch all contact messages |
+| `POST`   | `/api/messages`          | Submit a contact message   |
+| `PUT`    | `/api/messages/:id/read` | Mark a message as read     |
+| `DELETE` | `/api/messages/:id`      | Delete a message           |
+| `GET`    | `/api/settings`          | Fetch site settings        |
+| `POST`   | `/api/settings`          | Update site settings       |
+| `POST`   | `/api/upload-resume`     | Upload a PDF resume        |
 
 ### 🛠️ Admin Panel (`admin-panel`)
+
 - Private CMS dashboard built with React 19 + Vite
 - Manage **Projects**, **Skills**, **Messages**, and **Site Settings**
 - Resume **upload & replacement** UI
@@ -91,36 +94,39 @@ The project is split into three independent workspaces:
 ## 🧰 Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|---|---|
-| React 18 | UI framework |
-| Vite 5 | Build tool & dev server |
-| React Router v7 | Client-side routing |
-| Framer Motion | Animations & page transitions |
-| Three.js + React Three Fiber | 3D scene rendering |
-| @tsparticles | Particle background effects |
-| EmailJS | Client-side email delivery |
-| React Icons | Icon library |
+
+| Technology                   | Purpose                       |
+| ---------------------------- | ----------------------------- |
+| React 18                     | UI framework                  |
+| Vite 5                       | Build tool & dev server       |
+| React Router v7              | Client-side routing           |
+| Framer Motion                | Animations & page transitions |
+| Three.js + React Three Fiber | 3D scene rendering            |
+| @tsparticles                 | Particle background effects   |
+| EmailJS                      | Client-side email delivery    |
+| React Icons                  | Icon library                  |
 
 ### Backend
-| Technology | Purpose |
-|---|---|
-| Node.js + Express 5 | REST API server |
-| MongoDB + Mongoose 9 | Database & ODM |
-| Multer | File/resume upload handling |
-| dotenv | Environment variable management |
-| CORS | Cross-origin resource sharing |
-| Nodemon | Development auto-restart |
+
+| Technology           | Purpose                         |
+| -------------------- | ------------------------------- |
+| Node.js + Express 5  | REST API server                 |
+| MongoDB + Mongoose 9 | Database & ODM                  |
+| Multer               | File/resume upload handling     |
+| dotenv               | Environment variable management |
+| CORS                 | Cross-origin resource sharing   |
+| Nodemon              | Development auto-restart        |
 
 ### Admin Panel
-| Technology | Purpose |
-|---|---|
-| React 19 | UI framework |
-| Vite 8 | Build tool |
-| Axios | HTTP client for API calls |
-| Framer Motion | UI animations |
-| Lucide React | Icon set |
-| React Router v7 | Navigation |
+
+| Technology      | Purpose                   |
+| --------------- | ------------------------- |
+| React 19        | UI framework              |
+| Vite 8          | Build tool                |
+| Axios           | HTTP client for API calls |
+| Framer Motion   | UI animations             |
+| Lucide React    | Icon set                  |
+| React Router v7 | Navigation                |
 
 ---
 
@@ -259,17 +265,16 @@ Deploy the `server/` directory to any Node.js-compatible platform (Railway, Rend
 
 ## 🔑 Environment Variables
 
-| Variable | Location | Description |
-|---|---|---|
-| `MONGODB_URI` | `server/.env` | MongoDB Atlas connection string |
-| `PORT` | `server/.env` | Port the Express server listens on (default: `5001`) |
+| Variable        | Location        | Description                                           |
+| --------------- | --------------- | ----------------------------------------------------- |
+| `MONGODB_URI` | `server/.env` | MongoDB Atlas connection string                       |
+| `PORT`        | `server/.env` | Port the Express server listens on (default:`5001`) |
 
 ---
 
 ## 🧑‍💻 Author
 
-**Naji Ahmad Javahir**  
-Full-Stack Software Engineer
+**Naji Ahmad Javahir**Full-Stack Software Engineer
 
 - 🌐 Portfolio: [najiahmad.vercel.app](https://najiahmad.vercel.app/)
 - 💼 GitHub: [@NajiAhmad18](https://github.com/NajiAhmad18)
