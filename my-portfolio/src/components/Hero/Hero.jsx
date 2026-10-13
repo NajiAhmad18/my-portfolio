@@ -11,23 +11,19 @@ const CodePanel = () => {
   
   const fullCode = React.useMemo(() => [
     { text: 'const ', type: 'keyword' },
-    { text: 'buildSystem ', type: 'variable' },
-    { text: '= (', type: 'plain' },
-    { text: 'requirements', type: 'arg' },
-    { text: ': Config) => {\n', type: 'plain' },
-    { text: '  return new ', type: 'keyword' },
-    { text: 'Architecture', type: 'class' },
+    { text: 'system ', type: 'variable' },
+    { text: '= ', type: 'plain' },
+    { text: 'createArchitecture', type: 'class' },
     { text: '({\n', type: 'plain' },
-    { text: '    scale: ', type: 'plain' },
-    { text: "'predictable'", type: 'string' },
+    { text: "  client: 'React'", type: 'string' },
     { text: ',\n', type: 'plain' },
-    { text: '    performance: ', type: 'plain' },
-    { text: '0.99', type: 'number' },
+    { text: "  api: 'Node.js'", type: 'string' },
     { text: ',\n', type: 'plain' },
-    { text: '    state: ', type: 'plain' },
+    { text: '  services: ', type: 'plain' },
     { text: 'true', type: 'keyword' },
-    { text: '\n  });\n', type: 'plain' },
-    { text: '};', type: 'plain' }
+    { text: ',\n', type: 'plain' },
+    { text: "  database: 'MongoDB'", type: 'string' },
+    { text: '\n});', type: 'plain' }
   ], []);
 
   const totalChars = React.useMemo(() => 
