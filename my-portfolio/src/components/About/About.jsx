@@ -2,13 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiDownload, FiMapPin, FiMail, FiTerminal } from 'react-icons/fi';
 import styles from './About.module.css';
-import { useSettings } from '../../hooks/useSettings';
 import { useInteraction } from '../../hooks/useInteraction';
 import profileImg from '../../assets/profile.jpg';
 import MetricsDashboard from './MetricsDashboard';
 
+const RESUME_FILE_NAME = 'Naji_Ahmad_Javahir_Internship_Resume.pdf';
+const RESUME_DOWNLOAD_URL = `/${RESUME_FILE_NAME}?v=20261013`;
+
 const About = () => {
-  const { resumeUrl, resumeOriginalName } = useSettings();
   const { triggerFeedback } = useInteraction();
 
   const handleDownload = () => {
@@ -109,12 +110,8 @@ const About = () => {
                 <div>
                   <span className={styles.detailLabel}>Resume</span>
                   <a
-                    href={
-                      resumeUrl
-                        ? `${resumeUrl}${resumeUrl.includes('?') ? '&' : '?'}v=${Date.now()}`
-                        : '/Naji_Ahmad_Javahir_Internship_Resume.pdf'
-                    }
-                    download={resumeOriginalName || 'Naji_Ahmad_Javahir_Internship_Resume.pdf'}
+                    href={RESUME_DOWNLOAD_URL}
+                    download={RESUME_FILE_NAME}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.downloadLink}
