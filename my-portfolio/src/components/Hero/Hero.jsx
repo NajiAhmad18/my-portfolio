@@ -105,22 +105,22 @@ const Hero = () => {
         >
           <div className={styles.status}>
             <span className={styles.dot}></span>
-            <span className="moduleLabel" style={{ marginBottom: 0 }}>AVAILABLE FOR WORK</span>
+            <span>Available for opportunities</span>
           </div>
 
           <div className={styles.identity}>
-            <h2 className={styles.name}>Naji Ahmad Javahir</h2>
-            <span className="moduleLabel" style={{ color: 'var(--accent-primary)', marginBottom: 0 }}>FULL-STACK ENGINEER</span>
+            <p className={styles.role}>Full-stack software engineer</p>
+            <h1 className={styles.name}>Naji<br />Ahmad Javahir</h1>
           </div>
 
-          <motion.h1 
+          <motion.p
             className={styles.headline}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             Designing backend systems and APIs with a focus on structure, reliability, and performance.
-          </motion.h1>
+          </motion.p>
 
           <motion.p 
             className={styles.description}
@@ -128,7 +128,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            Specialized in database architecture and building interfaces that scale with real usage.
+            I build maintainable services, thoughtful interfaces, and database foundations for products that need to work in the real world.
           </motion.p>
 
           <div className={styles.heroActions}>
@@ -139,7 +139,7 @@ const Hero = () => {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              View Projects
+              View selected work
             </button>
             <Link
               to="/contact"
@@ -148,6 +148,9 @@ const Hero = () => {
             >
               Contact Me
             </Link>
+          </div>
+          <div className={styles.stackMeta} aria-label="Areas of expertise">
+            <span>React</span><span>Node.js</span><span>APIs</span><span>Databases</span>
           </div>
         </motion.div>
 
