@@ -8,7 +8,7 @@
 .name { position: relative; z-index: 4; max-width: 8ch; font-size: clamp(3.8rem, 8vw, 7.7rem); font-weight: 600; letter-spacing: -.09em; }
 .headline { max-width: 38rem; margin-bottom: 1.1rem; color: var(--text-secondary); font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 600; line-height: 1.4; }
 .description { max-width: 34rem; margin-bottom: var(--space-4); color: var(--text-muted); font-size: .98rem; }
-.stackMeta { display: flex; flex-wrap: wrap; gap: .5rem .9rem; margin-bottom: var(--space-5); color: var(--text-muted); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
+.stackMeta { display: flex; flex-wrap: wrap; gap: .5rem .9rem; margin-top: clamp(1rem, 2vw, 1.25rem); margin-bottom: var(--space-5); color: var(--text-muted); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
 .stackMeta span:not(:last-child)::after { margin-left: .9rem; color: var(--accent-primary); content: '·'; }
 .heroActions { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
 .primaryAction, .secondaryAction { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: .75rem 1.05rem; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; transition: transform var(--duration-fast) var(--ease-out), background var(--duration-fast), border-color var(--duration-fast); }
