@@ -1,6 +1,6 @@
 .cta {
   padding: 0;
-  background: var(--bg-darker);
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg-darker) 42%, transparent) 38%, color-mix(in srgb, var(--bg-darker) 70%, transparent) 100%);
 }
 
 .cta :global(.section-container) {
