@@ -79,12 +79,12 @@ const About = () => {
             transition={{ duration: 0.55, delay: 0.1 }}
           >
             <div className={styles.header}>
-              <span className="moduleLabel">MODULE: ABOUT</span>
-              <h2 className="roleTitle">Full-Stack Engineer</h2>
+              <span className="moduleLabel">01 / About</span>
+              <h2 className="roleTitle">Systems work best when every layer has a clear job.</h2>
             </div>
 
             <p className={styles.focusLine}>
-              Focused on backend systems, API design, and structured full-stack development.
+              I design practical software from the request boundary through to the data it relies on.
             </p>
 
             <p className={styles.text}>
