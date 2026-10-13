@@ -61,8 +61,8 @@ const CodingProfiles = () => {
     <section id="profiles" className={styles.profiles}>
       <div className="section-container">
         <div className={styles.header}>
-          <span className="moduleLabel">MODULE: PROFILES</span>
-          <h2 className="moduleTitle">Coding Profiles</h2>
+          <span className="moduleLabel">05 / Practice</span>
+          <h2 className="moduleTitle">Where I keep learning in public.</h2>
         </div>
 
         <motion.div 

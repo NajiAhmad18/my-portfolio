@@ -57,8 +57,8 @@ const Articles = () => {
     <section id="articles" className={styles.articles}>
       <div className="section-container">
         <div className={styles.header}>
-          <span className="moduleLabel">MODULE: ARTICLES</span>
-          <h2 className="moduleTitle">Featured Articles</h2>
+          <span className="moduleLabel">04 / Writing</span>
+          <h2 className="moduleTitle">Notes from the work.</h2>
         </div>
 
         <div className={styles.grid}>
