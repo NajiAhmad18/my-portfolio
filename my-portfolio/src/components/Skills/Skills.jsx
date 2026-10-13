@@ -83,8 +83,8 @@ const Skills = () => {
     <section id="skills" className={styles.skills}>
       <div className="section-container">
         <div className={styles.header}>
-          <span className="moduleLabel">MODULE: SKILLS</span>
-          <h2 className="moduleTitle">Technical Stack</h2>
+          <span className="moduleLabel">02 / Expertise</span>
+          <h2 className="moduleTitle">A practical engineering stack.</h2>
         </div>
 
         <div className={styles.tabs}>
