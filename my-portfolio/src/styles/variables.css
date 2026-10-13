@@ -10,7 +10,7 @@
   --font-main: 'Manrope', sans-serif; --font-heading: 'Space Grotesk', sans-serif; --font-mono: 'DM Mono', monospace;
   --heading-size: clamp(2.25rem, 4vw, 4.25rem); --heading-weight: 600; --heading-spacing: -0.055em; --label-size: 0.69rem; --label-spacing: 0.14em; --label-weight: 500;
   --space-1: .5rem; --space-2: .75rem; --space-3: 1rem; --space-4: 1.5rem; --space-5: 2.25rem; --space-6: 3.5rem; --space-7: 5.5rem;
-  --section-padding: clamp(5.5rem, 11vw, 10rem) 1.5rem; --max-width: 1240px; --nav-height: 5.5rem; --radius-sm: .375rem; --radius-md: .75rem; --radius-lg: 1.25rem; --shadow-soft: 0 18px 45px var(--shadow-color); --ease-out: cubic-bezier(.22, 1, .36, 1); --duration-fast: 160ms; --duration-base: 300ms;
+  --section-padding: clamp(4.5rem, 8vw, 7.5rem) 1.5rem; --max-width: 1240px; --nav-height: 5.5rem; --radius-sm: .375rem; --radius-md: .75rem; --radius-lg: 1.25rem; --shadow-soft: 0 18px 45px var(--shadow-color); --ease-out: cubic-bezier(.22, 1, .36, 1); --duration-fast: 160ms; --duration-base: 300ms;
 }
 
 [data-theme='light'] {
