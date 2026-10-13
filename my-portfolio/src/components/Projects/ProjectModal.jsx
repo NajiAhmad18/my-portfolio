@@ -28,6 +28,14 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (isOpen && event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   const IconComponent = project ? projectIcons[project.id] : null;
 
   return (
@@ -35,6 +43,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
       {isOpen && project && (
         <motion.div 
           className={styles.modalOverlay}
+          role="presentation"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -42,6 +51,9 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
         >
           <motion.div 
             className={styles.modalContent}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
             initial={{ scale: 0.8, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -61,7 +73,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               )}
             </div>
 
-            <h3 className={styles.modalTitle}>{project.title}</h3>
+            <h3 id="project-modal-title" className={styles.modalTitle}>{project.title}</h3>
             
             <div className={styles.techStack} style={{ marginBottom: '2rem' }}>
               {project.techStack.map(tech => (
