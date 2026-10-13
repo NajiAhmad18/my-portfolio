@@ -11,18 +11,13 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
-    "@react-three/drei": "^9.105.6",
-    "@react-three/fiber": "^8.16.2",
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.3.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^11.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
-    "react-router-dom": "^7.14.2",
-    "three": "^0.164.0"
+    "react-router-dom": "^7.14.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
