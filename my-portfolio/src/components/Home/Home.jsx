@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 
 const Hero = React.lazy(() => import('../Hero/Hero'));
 const About = React.lazy(() => import('../About/About'));
+const EngineeringApproach = React.lazy(() => import('../EngineeringApproach/EngineeringApproach'));
 const Skills = React.lazy(() => import('../Skills/Skills'));
 const Projects = React.lazy(() => import('../Projects/Projects'));
 const Articles = React.lazy(() => import('../Articles/Articles'));
@@ -15,6 +16,7 @@ const Home = () => {
     <Suspense fallback={null}>
       <Hero />
       <About />
+      <EngineeringApproach />
       <Skills />
       <Projects />
       <Articles />
