@@ -12,7 +12,7 @@ const CodePanel = () => {
   const fullCode = React.useMemo(() => [
     { text: 'const ', type: 'keyword' },
     { text: 'system ', type: 'variable' },
-    { text: '= ', type: 'plain' },
+    { text: '=\n  ', type: 'plain' },
     { text: 'createArchitecture', type: 'class' },
     { text: '({\n', type: 'plain' },
     { text: "  client: 'React'", type: 'string' },
