@@ -15,39 +15,9 @@ const Contact = React.lazy(() => import('./components/Contact/Contact'));
 const Footer = React.lazy(() => import('./components/Footer/Footer'));
 const PageTransition = React.lazy(() => import('./components/PageTransition'));
 const ScrollToTop = React.lazy(() => import('./components/ScrollToTop'));
-const HeroScene = React.lazy(() => import('./components/Hero/HeroScene'));
-const ParticlesBg = React.lazy(() => import('./components/Hero/ParticlesBg'));
-
-// Check WebGL support before rendering 3D
-const checkWebGL = () => {
-  try {
-    const canvas = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext &&
-      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-  } catch (e) {
-    return false;
-  }
-};
-
-// Error boundary to catch WebGL crashes silently
-class SceneErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-  render() {
-    if (this.state.hasError) return null;
-    return this.props.children;
-  }
-}
-
 const GlobalBackground = () => {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 800, 2400], [1, 0.6, 0.2]);
-  const webGLSupported = React.useMemo(() => checkWebGL(), []);
 
   return (
     <motion.div
@@ -60,19 +30,7 @@ const GlobalBackground = () => {
         opacity,
       }}
     >
-      {/* Subtle dot-grid overlay */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: 'radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-      }} />
-
-      <SceneErrorBoundary>
-        <Suspense fallback={null}>
-          <ParticlesBg />
-        </Suspense>
-      </SceneErrorBoundary>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 75% 20%, var(--accent-glow), transparent 24rem)' }} />
     </motion.div>
   );
 };
