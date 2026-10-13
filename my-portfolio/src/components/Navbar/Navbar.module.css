@@ -1,114 +1,15 @@
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 32px 0;
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.scrolled {
-  padding: 16px 0;
-  background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px -10px var(--shadow-color);
-}
-
-.navContainer {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
-.navLinks {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
-.navLink {
-  color: var(--text-muted);
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  position: relative;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.navLink:hover {
-  color: var(--text-main);
-}
-
-.activeLink {
-  color: var(--accent-primary) !important;
-}
-
-.activeLink::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent-primary);
-  box-shadow: 0 0 10px var(--accent-primary);
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.mobileMenuBtn {
-  display: none;
-  color: var(--text-main);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.8rem;
-}
-
-@media (max-width: 1024px) {
-  .navContainer {
-    padding: 0 24px;
-  }
-  
-  .navLinks {
-    display: none;
-  }
-  
-  .mobileMenuBtn {
-    display: block;
-  }
-  
-  .navLinks.mobileOpen {
-    display: flex;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100vh;
-    background: var(--bg-surface);
-    flex-direction: column;
-    justify-content: center;
-    padding: 48px;
-    gap: 32px;
-    border-left: 1px solid var(--card-border);
-    z-index: 1001;
-  }
-}
+.navbar { position: fixed; inset: 0 0 auto; z-index: 1000; padding: 1.25rem 0; transition: padding var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out); }
+.scrolled { padding: .7rem 0; background: var(--nav-bg); border-bottom: 1px solid var(--border-subtle); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.navContainer { display: flex; width: min(100%, var(--max-width)); align-items: center; justify-content: space-between; margin: 0 auto; padding: 0 1.5rem; }
+.logo { display: flex; align-items: center; color: var(--text-main); }
+.navLinks { display: flex; align-items: center; gap: 1.6rem; }
+.navLink { position: relative; color: var(--text-muted); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .07em; text-transform: uppercase; transition: color var(--duration-fast) ease; }
+.navLink:hover, .activeLink { color: var(--text-main); }
+.activeLine { position: absolute; right: 0; bottom: -.45rem; left: 0; height: 1px; background: var(--accent-primary); }
+.controls { display: flex; align-items: center; gap: .75rem; }
+.themeWrapper { display: grid; place-items: center; }
+.resumeLink { display: inline-flex; align-items: center; gap: .35rem; padding: .55rem .75rem; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); color: var(--text-main); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .04em; transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast); }
+.resumeLink:hover { border-color: var(--accent-primary); background: var(--accent-glow); color: var(--accent-primary); }
+.mobileMenuBtn { display: none; color: var(--text-main); font-size: 1.4rem; }
+@media (max-width: 900px) { .navLinks { display: none; } .mobileMenuBtn { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; } .navLinks.mobileOpen { position: fixed; inset: 0 0 0 auto; z-index: 1001; display: flex; width: min(82vw, 22rem); flex-direction: column; align-items: flex-start; justify-content: center; gap: 1.75rem; padding: 2rem; border-left: 1px solid var(--border-strong); background: var(--bg-surface); box-shadow: var(--shadow-soft); } .navLinks.mobileOpen .navLink { font-size: 1rem; } }
+@media (max-width: 480px) { .navContainer { padding-inline: 1.125rem; } .resumeLink { display: none; } }

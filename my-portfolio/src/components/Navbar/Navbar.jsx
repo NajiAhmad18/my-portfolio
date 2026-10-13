@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import Logo from '../Logo/Logo';
@@ -46,11 +46,10 @@ const Navbar = () => {
   }, [location]);
 
   const navLinks = [
-    { name: 'Home',     href: '/' },
+    { name: 'Work',     href: '/projects' },
     { name: 'About',    href: '/about' },
     { name: 'Skills',   href: '/skills' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Articles', href: '/articles' },
+    { name: 'Writing',  href: '/articles' },
     { name: 'Contact',  href: '/contact' },
   ];
 
@@ -111,13 +110,17 @@ const Navbar = () => {
           >
             <ThemeToggle />
           </motion.div>
+          <a className={styles.resumeLink} href="/Naji_Ahmad_Javahir_Internship_Resume.pdf?v=20261013" download="Naji_Ahmad_Javahir_Internship_Resume.pdf">
+            Resume <FiArrowUpRight aria-hidden="true" />
+          </a>
           <motion.button 
             className={styles.mobileMenuBtn} 
             onClick={() => {
               triggerFeedback('light');
               setMobileOpen(!mobileOpen);
             }}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileOpen}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
