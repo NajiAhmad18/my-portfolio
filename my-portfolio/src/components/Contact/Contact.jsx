@@ -59,8 +59,8 @@ const Contact = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <span className="moduleLabel">MODULE: CONTACT</span>
-          <h2 className="moduleTitle">Let’s Work Together</h2>
+          <span className="moduleLabel">06 / Contact</span>
+          <h2 className="moduleTitle">Let’s make the next move useful.</h2>
         </motion.div>
 
         <motion.div 

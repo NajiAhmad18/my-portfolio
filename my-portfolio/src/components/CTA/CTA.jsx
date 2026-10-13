@@ -55,17 +55,16 @@ const CTA = () => {
             
             <div className={styles.output}>
               <h2 className={styles.heading}>
-                Let's build something impactful together.
+                Have something worth building?
               </h2>
               <p className={styles.subheading}>
-                I'm currently available for internships, client projects, and 
-                engineering collaborations.
+                Let’s talk about a product, a system, or the next engineering challenge.
               </p>
             </div>
 
             <div className={styles.actionRow}>
               <button className={styles.actionBtn} onClick={handleAction}>
-                <span className={styles.btnLabel}>Start Conversation</span>
+                <span className={styles.btnLabel}>Start a conversation</span>
                 <FiChevronRight className={styles.btnIcon} />
               </button>
             </div>
