@@ -40,6 +40,22 @@ function App() {
   const settings = useSettings();
 
   React.useEffect(() => {
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!pointer.matches || reducedMotion.matches) return undefined;
+    let frame;
+    const updatePointer = (event) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+        document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+      });
+    };
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('pointermove', updatePointer); };
+  }, []);
+
+  React.useEffect(() => {
     if (settings.siteTitle) {
       document.title = `${settings.siteTitle} | Portfolio`;
     }
