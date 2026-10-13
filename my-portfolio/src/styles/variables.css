@@ -1,57 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  /* Dark Mode (Premium Dark) */
-  --bg-dark: #050508; 
-  --bg-surface: #0a0a0f;
-  --bg-darker: #020204;
-  --text-main: #f8fafc;
-  --text-muted: #8292a8;
-
-  --accent-primary: #14B8A6; /* Teal 500 */
-  --accent-secondary: #0D9488;
-  --accent-glow: rgba(20, 184, 166, 0.15);
-  --developer-accent: #2DD4BF; /* Brighter teal for labels */
-  
-  --card-bg: #0a0a0f;
-  --card-border: #111827;
-  --shadow-color: rgba(0, 0, 0, 0.8);
-  --nav-bg: rgba(5, 5, 8, 0.85);
-
-  /* Typography System */
-  --font-main: 'Inter', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
-  /* Titles: Updated larger sizing as requested */
-  --heading-size: 2.8rem;
-  --heading-weight: 800;
-  --heading-spacing: -0.04em;
-
-  /* Module labels */
-  --label-size: 13px;
-  --label-spacing: 0.2em;
-  --label-weight: 700;
-
-  /* Layout */
-  --max-width: 1100px;
-  --section-padding: 100px 24px;
+  color-scheme: dark;
+  --bg-dark: #080a0a; --bg-surface: #0d1111; --bg-darker: #050606; --surface-raised: #121817; --surface-hover: #161d1c;
+  --text-main: #edf3f1; --text-secondary: #a9b7b3; --text-muted: #71807c;
+  --accent-primary: #35d0b4; --accent-secondary: #1c9f8a; --accent-glow: rgba(53, 208, 180, 0.1); --developer-accent: #6de4cc;
+  --card-bg: var(--bg-surface); --card-border: rgba(204, 226, 219, 0.12); --border-subtle: rgba(204, 226, 219, 0.08); --border-strong: rgba(204, 226, 219, 0.18);
+  --shadow-color: rgba(0, 0, 0, 0.35); --nav-bg: rgba(8, 10, 10, 0.78);
+  --font-main: 'Manrope', sans-serif; --font-heading: 'Space Grotesk', sans-serif; --font-mono: 'DM Mono', monospace;
+  --heading-size: clamp(2.25rem, 4vw, 4.25rem); --heading-weight: 600; --heading-spacing: -0.055em; --label-size: 0.69rem; --label-spacing: 0.14em; --label-weight: 500;
+  --space-1: .5rem; --space-2: .75rem; --space-3: 1rem; --space-4: 1.5rem; --space-5: 2.25rem; --space-6: 3.5rem; --space-7: 5.5rem;
+  --section-padding: clamp(5.5rem, 11vw, 10rem) 1.5rem; --max-width: 1240px; --radius-sm: .375rem; --radius-md: .75rem; --radius-lg: 1.25rem; --shadow-soft: 0 18px 45px var(--shadow-color); --ease-out: cubic-bezier(.22, 1, .36, 1); --duration-fast: 160ms; --duration-base: 300ms;
 }
 
 [data-theme='light'] {
-  --bg-dark: #F8FAFC;
-  --bg-surface: #FFFFFF;
-  --bg-darker: #F1F5F9;
-  --text-main: #0F172A;
-  --text-muted: #64748b;
-
-  --accent-primary: #14B8A6;
-  --accent-secondary: #0D9488;
-  --accent-glow: rgba(20, 184, 166, 0.05);
-  --developer-accent: #0D9488;
-
-  --card-bg: #FFFFFF;
-  --card-border: #E2E8F0;
-  --shadow-color: rgba(15, 23, 42, 0.05);
-  --nav-bg: rgba(248, 250, 252, 0.85);
+  color-scheme: light;
+  --bg-dark: #f6f8f7; --bg-surface: #fff; --bg-darker: #edf1ef; --surface-raised: #fff; --surface-hover: #f1f6f4;
+  --text-main: #10211d; --text-secondary: #455b55; --text-muted: #70817b; --accent-primary: #118b76; --accent-secondary: #0d7462; --accent-glow: rgba(17, 139, 118, .08); --developer-accent: #0d7462;
+  --card-bg: #fff; --card-border: rgba(16, 33, 29, .12); --border-subtle: rgba(16, 33, 29, .08); --border-strong: rgba(16, 33, 29, .16); --shadow-color: rgba(17, 38, 31, .08); --nav-bg: rgba(246, 248, 247, .82);
 }
