@@ -70,7 +70,7 @@ function App() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <ScrollToTop />
           <Navbar />
-          <main style={{ paddingTop: '80px' }}>
+          <main>
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 {/* Home: all sections stacked, scroll through everything */}

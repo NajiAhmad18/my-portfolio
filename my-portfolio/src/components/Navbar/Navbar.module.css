@@ -1,4 +1,4 @@
-.navbar { position: fixed; inset: 0 0 auto; z-index: 1000; padding: 1.25rem 0; transition: padding var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out); }
+.navbar { position: fixed; inset: 0 0 auto; z-index: 1000; min-height: var(--nav-height); padding: 1.25rem 0; transition: padding var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out); }
 .scrolled { padding: .7rem 0; background: var(--nav-bg); border-bottom: 1px solid var(--border-subtle); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .navContainer { display: flex; width: min(100%, var(--max-width)); align-items: center; justify-content: space-between; margin: 0 auto; padding: 0 1.5rem; }
 .logo { display: flex; align-items: center; color: var(--text-main); }

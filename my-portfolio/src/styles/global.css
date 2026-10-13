@@ -8,6 +8,7 @@ body::after { position: fixed; inset: 0; z-index: -1; content: ''; pointer-event
 h1, h2, h3, h4, h5, h6 { color: var(--text-main); font-family: var(--font-heading); font-weight: var(--heading-weight); letter-spacing: var(--heading-spacing); line-height: 1.04; }
 a { color: inherit; text-decoration: none; } button, input, textarea { font: inherit; } button { border: 0; background: none; cursor: pointer; } ul { list-style: none; } img { display: block; max-width: 100%; } :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 4px; }
 .section-container { width: min(100%, var(--max-width)); margin: 0 auto; padding: var(--section-padding); }
+main { padding-top: var(--nav-height); } main section[id] { scroll-margin-top: calc(var(--nav-height) + var(--space-3)); }
 .moduleLabel { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: var(--space-3); color: var(--developer-accent); font-family: var(--font-mono); font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-spacing); text-transform: uppercase; }
 .moduleLabel::before { width: 1.75rem; height: 1px; background: currentColor; content: ''; opacity: .65; }
 .moduleTitle { max-width: 12ch; margin-bottom: var(--space-6); font-size: var(--heading-size); }
