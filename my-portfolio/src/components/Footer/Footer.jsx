@@ -64,7 +64,7 @@ const Footer = () => {
               NAJI.
             </Link>
             <p className={styles.bio}>
-              Software engineer building reliable backend services and clean web interfaces. Open to work and client projects — let's connect.
+              Software engineer focused on dependable backend services and clear product interfaces.
             </p>
           </div>
 
@@ -123,7 +123,7 @@ const Footer = () => {
             }}
             style={{ cursor: 'default' }}
           >
-            Built with React &amp; Three.js
+            build.status = "online"
           </p>
         </div>
       </div>
