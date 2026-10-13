@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 import { useInteraction } from '../../hooks/useInteraction';
-const HeroScene = React.lazy(() => import('./HeroScene'));
+import ArchitectureFlow from './ArchitectureFlow';
 
 const CodePanel = () => {
   const panelRef = useRef(null);
@@ -161,11 +161,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className={styles.visualContainer}>
-            <div className={styles.sceneWrapper}>
-              <React.Suspense fallback={null}>
-                <HeroScene />
-              </React.Suspense>
-            </div>
+            <div className={styles.sceneWrapper}><ArchitectureFlow /></div>
             <div className={styles.panelWrapper}>
               <CodePanel />
             </div>
