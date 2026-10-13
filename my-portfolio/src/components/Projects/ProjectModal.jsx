@@ -49,7 +49,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
             onClick={(e) => e.stopPropagation()}
             style={{ borderTop: `4px solid ${project.color}` }}
           >
-            <button className={styles.closeBtn} onClick={onClose}>
+            <button className={styles.closeBtn} onClick={onClose} aria-label="Close project details">
               <FiX />
             </button>
 
@@ -69,7 +69,8 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
               ))}
             </div>
 
-            <h4 className={styles.modalSectionTitle}>About the Project</h4>
+            <p className={styles.caseLabel}>Project overview</p>
+            <h4 className={styles.modalSectionTitle}>What it does</h4>
             <p className={styles.modalDesc}>{project.description}</p>
 
             {project.problem && project.solution && (
