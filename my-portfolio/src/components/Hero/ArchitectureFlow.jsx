@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './ArchitectureFlow.module.css';
 
-const ArchitectureFlow = () => (
-  <div className={styles.flow} aria-label="Client requests flow through an API and services to a database">
+const ArchitectureFlow = ({ intro }) => (
+  <div className={`${styles.flow} ${intro ? styles.introFlow : ''}`} aria-label="Client requests flow through an API and services to a database">
     <span className={styles.caption}>system / request-path</span>
     <div className={styles.diagram} aria-hidden="true">
       <div className={styles.node}><span>01</span><strong>Client</strong><small>React</small></div>

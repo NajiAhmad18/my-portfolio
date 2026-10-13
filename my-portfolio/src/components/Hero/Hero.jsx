@@ -5,7 +5,7 @@ import styles from './Hero.module.css';
 import { useInteraction } from '../../hooks/useInteraction';
 import ArchitectureFlow from './ArchitectureFlow';
 
-const CodePanel = () => {
+const CodePanel = ({ intro }) => {
   const panelRef = useRef(null);
   const [visibleChars, setVisibleChars] = React.useState(0);
   
@@ -65,7 +65,7 @@ const CodePanel = () => {
 
   return (
     <div 
-      className={`${styles.codePanel} spotlight`} 
+      className={`${styles.codePanel} spotlight ${intro ? styles.introCode : ''}`}
       ref={panelRef}
       onMouseMove={handleMouseMove}
     >
@@ -89,31 +89,39 @@ const CodePanel = () => {
 
 const Hero = () => {
   const { triggerFeedback } = useInteraction();
+  const [hasVisited, setHasVisited] = React.useState(() => typeof window !== 'undefined' && sessionStorage.getItem('hero-intro-seen') === 'true');
+  const [introComplete, setIntroComplete] = React.useState(false);
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const shortIntro = hasVisited || reducedMotion;
+
+  React.useEffect(() => {
+    if (!hasVisited && !reducedMotion) sessionStorage.setItem('hero-intro-seen', 'true');
+    const timer = window.setTimeout(() => setIntroComplete(true), shortIntro ? 420 : 1400);
+    return () => window.clearTimeout(timer);
+  }, [hasVisited, reducedMotion, shortIntro]);
 
   return (
-    <section id="hero" className={styles.hero}>
+    <section id="hero" className={`${styles.hero} ${introComplete ? styles.introComplete : ''}`}>
       <div className={styles.grid}>
         <motion.div
           className={styles.left}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={false}
         >
-          <div className={styles.status}>
+          <motion.div className={styles.status} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .35, delay: shortIntro ? 0 : .1 }}>
             <span className={styles.dot}></span>
             <span>Available for opportunities</span>
-          </div>
+          </motion.div>
 
           <div className={styles.identity}>
-            <p className={styles.role}>Full-stack software engineer</p>
-            <h1 className={styles.name}>Naji<br />Ahmad Javahir</h1>
+            <motion.p className={styles.role} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .35, delay: shortIntro ? .03 : .2 }}>Full-stack software engineer</motion.p>
+            <h1 className={styles.name}><span><motion.span initial={{ y: shortIntro ? 0 : '105%' }} animate={{ y: 0 }} transition={{ duration: shortIntro ? .2 : .55, delay: shortIntro ? .05 : .25 }}>Naji</motion.span></span><span><motion.span initial={{ y: shortIntro ? 0 : '105%' }} animate={{ y: 0 }} transition={{ duration: shortIntro ? .2 : .55, delay: shortIntro ? .08 : .34 }}>Ahmad</motion.span></span><span><motion.span initial={{ y: shortIntro ? 0 : '105%' }} animate={{ y: 0 }} transition={{ duration: shortIntro ? .2 : .55, delay: shortIntro ? .11 : .43 }}>Javahir</motion.span></span></h1>
           </div>
 
           <motion.p
             className={styles.headline}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: shortIntro ? .2 : .4, delay: shortIntro ? .12 : .65 }}
           >
             Designing backend systems and APIs with a focus on structure, reliability, and performance.
           </motion.p>
@@ -122,12 +130,12 @@ const Hero = () => {
             className={styles.description}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: shortIntro ? .2 : .4, delay: shortIntro ? .16 : .76 }}
           >
             I build maintainable services, thoughtful interfaces, and database foundations for products that need to work in the real world.
           </motion.p>
 
-          <div className={styles.heroActions}>
+          <motion.div className={styles.heroActions} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .35, delay: shortIntro ? .2 : .84 }}>
             <button
               className={styles.primaryAction}
               onClick={() => {
@@ -144,22 +152,20 @@ const Hero = () => {
             >
               Contact Me
             </Link>
-          </div>
-          <div className={styles.stackMeta} aria-label="Areas of expertise">
+          </motion.div>
+          <motion.div className={styles.stackMeta} aria-label="Areas of expertise" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .3, delay: shortIntro ? .24 : .99 }}>
             <span>React</span><span>Node.js</span><span>APIs</span><span>Databases</span>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.div
           className={styles.right}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={false}
         >
           <div className={styles.visualContainer}>
-            <div className={styles.sceneWrapper}><ArchitectureFlow /></div>
+            <motion.div className={styles.sceneWrapper} initial={{ opacity: 0, y: shortIntro ? 0 : 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .45, delay: shortIntro ? .12 : .93 }}><ArchitectureFlow intro={!shortIntro} /></motion.div>
             <div className={styles.panelWrapper}>
-              <CodePanel />
+              <motion.div initial={{ opacity: 0, y: shortIntro ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: shortIntro ? .2 : .45, delay: shortIntro ? .08 : .65 }}><CodePanel intro={!shortIntro} /></motion.div>
             </div>
           </div>
         </motion.div>
