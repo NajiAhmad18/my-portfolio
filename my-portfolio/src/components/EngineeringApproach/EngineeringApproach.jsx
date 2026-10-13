@@ -6,9 +6,9 @@ const EngineeringApproach = () => {
   const sectionRef = useRef(null);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start 78%', 'end 45%'] });
-  const scaleX = useTransform(scrollYProgress, [0, 1], reducedMotion ? [1, 1] : [.7, 1]);
+  const scaleX = useTransform(scrollYProgress, [0, 1], reducedMotion ? [1, 1] : [.72, 1]);
   const radius = useTransform(scrollYProgress, [0, 1], reducedMotion ? ['1rem', '1rem'] : ['1.25rem', '0rem']);
-  const opacity = useTransform(scrollYProgress, [0, .45], [0, 1]);
-  return <section ref={sectionRef} className={styles.section} aria-labelledby="approach-title"><div className={styles.sticky}><motion.div className={styles.panel} style={{ scaleX, borderRadius }}><div className={styles.inner}><span className="moduleLabel">Engineering approach</span><h2 id="approach-title">Good software should be clear at every layer.</h2><motion.div className={styles.detail} style={{ opacity }}><div className={styles.path}><span>Interface</span><i>↓</i><span>API</span><i>↓</i><span>Services</span><i>↓</i><span>Data</span></div><p>Structure keeps systems understandable. Reliability follows from deliberate boundaries.</p><span className={styles.meta}>route / service / data</span></motion.div></div></motion.div></div></section>;
+  const opacity = useTransform(scrollYProgress, [0, .45], [.28, 1]);
+  return <section ref={sectionRef} className={styles.section} aria-labelledby="approach-title"><div className={styles.sticky}><motion.div className={styles.panel} style={{ scaleX, borderRadius: radius }}><div className={styles.inner}><span className="moduleLabel">04 / Engineering approach</span><p className={styles.intro}>Building with intent</p><h2 id="approach-title">Good software should be clear at every layer.</h2><span className={styles.scrollHint}>Scroll to explore ↓</span><motion.div className={styles.detail} style={{ opacity }}><div className={styles.path}><span>Interface</span><i>↓</i><span>API</span><i>↓</i><span>Services</span><i>↓</i><span>Data</span></div><p>Structure keeps systems understandable. Reliability follows from deliberate boundaries.</p><span className={styles.meta}>route / service / data</span></motion.div></div></motion.div></div></section>;
 };
 export default EngineeringApproach;
