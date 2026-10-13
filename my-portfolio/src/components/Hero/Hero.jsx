@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 import { useInteraction } from '../../hooks/useInteraction';
 import ArchitectureFlow from './ArchitectureFlow';
+import CircuitField from '../CircuitField';
 
 const CodePanel = ({ intro }) => {
   const panelRef = useRef(null);
@@ -101,7 +102,7 @@ const Hero = () => {
   }, [hasVisited, reducedMotion, shortIntro]);
 
   return (
-    <section id="hero" className={`${styles.hero} ${introComplete ? styles.introComplete : ''}`}>
+    <section id="hero" className={`${styles.hero} ${introComplete ? styles.introComplete : ''}`}><CircuitField variant="hero" />
       <div className={styles.grid}>
         <motion.div
           className={styles.left}

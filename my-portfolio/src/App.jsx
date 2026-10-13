@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { useSettings } from './hooks/useSettings';
-import CircuitBackground from './components/CircuitBackground';
 
 const Navbar = React.lazy(() => import('./components/Navbar/Navbar'));
 const Home = React.lazy(() => import('./components/Home/Home'));
@@ -66,7 +65,6 @@ function App() {
     <div className="app-container" style={{ position: 'relative' }}>
       {/* Fixed 3D background that fades as you scroll */}
       <GlobalBackground />
-      <CircuitBackground />
 
       <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a0f', color: '#fff' }}>Loading...</div>}>
         <div style={{ position: 'relative', zIndex: 1 }}>

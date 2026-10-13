@@ -23,3 +23,4 @@
 @keyframes heroAtmosphere { 0% { filter: brightness(1.12); } 100% { filter: brightness(1); } }
 @keyframes requestSignal { 0% { left: 49%; opacity: 0; } 18% { opacity: 1; } 100% { left: 73%; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
+.hero { position: relative; isolation: isolate; }.grid { position: relative; z-index: 1; }
