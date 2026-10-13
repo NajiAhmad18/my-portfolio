@@ -7,8 +7,8 @@ export const useSettings = () => {
     siteTitle: 'Naji Ahmad Javahir',
     siteSubtitle: 'Software Engineering Undergraduate',
     aboutText: 'Software Engineering Undergraduate focused on building practical, scalable solutions',
-    resumeUrl: '/Naji_Ahmad_Javahir_Resume.pdf',
-    resumeOriginalName: 'Naji_Ahmad_Javahir_Resume.pdf'
+    resumeUrl: '/Naji_Ahmad_Javahir_Internship_Resume.pdf',
+    resumeOriginalName: 'Naji_Ahmad_Javahir_Internship_Resume.pdf'
   });
 
   const fetchSettings = async () => {

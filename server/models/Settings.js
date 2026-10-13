@@ -15,11 +15,11 @@ const SettingsSchema = new mongoose.Schema({
   },
   resumeUrl: {
     type: String,
-    default: '/resume.pdf'
+    default: '/Naji_Ahmad_Javahir_Internship_Resume.pdf'
   },
   resumeOriginalName: {
     type: String,
-    default: 'Resume.pdf'
+    default: 'Naji_Ahmad_Javahir_Internship_Resume.pdf'
   },
   socialLinks: {
     github: { type: String, default: 'https://github.com/NajiAhmad18' },

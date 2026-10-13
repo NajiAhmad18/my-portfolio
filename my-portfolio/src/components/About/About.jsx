@@ -112,9 +112,9 @@ const About = () => {
                     href={
                       resumeUrl
                         ? `${resumeUrl}${resumeUrl.includes('?') ? '&' : '?'}v=${Date.now()}`
-                        : '/Naji_Ahmad_Javahir_Resume.pdf'
+                        : '/Naji_Ahmad_Javahir_Internship_Resume.pdf'
                     }
-                    download={resumeOriginalName || 'Naji_Ahmad_Javahir_Resume.pdf'}
+                    download={resumeOriginalName || 'Naji_Ahmad_Javahir_Internship_Resume.pdf'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.downloadLink}
